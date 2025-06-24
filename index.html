@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERP: The Earth Reimagined Project - Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .chart-container { position: relative; width: 100%; max-width: 300px; margin-left: auto; margin-right: auto; height: 300px; }
+        .stat-number { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center my-12">
+            <div class="flex items-center justify-center mb-4">
+                <!-- Updated src to a relative path for GitHub deployment -->
+                <img src="logo final conv 1.jpeg" alt="TERP Project Logo" class="h-16 md:h-20 mr-4">
+                <h1 class="text-5xl md:text-6xl font-extrabold" style="color: #581845;">THE EARTH REIMAGINED PROJECT</h1>
+            </div>
+            <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-6">"We don’t just talk about change — we build it into everyday life, one community at a time."</p>
+            <div class="flex flex-wrap justify-center gap-4 mt-4">
+                <a href="koottam25report.html" target="_blank" class="px-6 py-2 rounded-full bg-gray-200 text-gray-700 font-semibold hover:bg-gray-300 transition-colors shadow-md">
+                    Koottam Report
+                </a>
+                <a href="roots_routes.html" target="_blank" class="px-6 py-2 rounded-full bg-gray-200 text-gray-700 font-semibold hover:bg-gray-300 transition-colors shadow-md">
+                    Roots & Routes
+                </a>
+            </div>
+        </header>
+
+        <section id="philosophy" class="bg-white rounded-lg shadow-md p-8 md:p-12 mb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div class="border-l-4 pl-6" style="border-color: #FFC300;">
+                    <h2 class="text-3xl font-bold mb-4" style="color: #900C3F;">What Guides Us</h2>
+                    <p class="text-lg leading-relaxed">We believe sustainability is not a luxury — it’s a shared responsibility rooted in community, creativity, and care. Real change happens when people feel connected to the systems they’re part of.</p>
+                </div>
+                <div class="border-l-4 pl-6" style="border-color: #FF5733;">
+                    <h2 class="text-3xl font-bold mb-4" style="color: #900C3F;">What Drives Us</h2>
+                    <p class="text-lg leading-relaxed">We work to make sustainability more accessible, measurable, and meaningful through audits, creative engagement, and collaborative tools, moving forward with clarity, culture, and purpose.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="journey" class="my-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold" style="color: #581845;">Our Journey: A Quiet Revolt</h2>
+                <p class="text-lg text-gray-600 mt-2 max-w-4xl mx-auto">TERP began with a simple question: "Why are we still discussing sustainability in such disconnected ways?" It was born from the frustration of seeing policies that looked good on paper but felt hollow on the ground. We started small, proving that sustainability could be playful, local, measurable, and collective.</p>
+            </div>
+            
+            <div class="relative wrap overflow-hidden p-10 h-full">
+                <div class="border-2-2 absolute border-opacity-20 border-gray-700 h-full border" style="left: 50%"></div>
+                
+                <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
+                        <h1 class="mx-auto font-semibold text-lg text-white">💡</h1>
+                    </div>
+                    <div class="order-1 rounded-lg shadow-md w-5/12 px-6 py-4" style="background-color: #FFC300;">
+                        <h3 class="font-bold text-gray-800 text-xl">The LED Bulb Experiment</h3>
+                        <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">Calculated basic energy savings to prove sustainability could be measurable and relatable.</p>
+                    </div>
+                </div>
+
+                <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
+                        <h1 class="mx-auto text-white font-semibold text-lg">📊</h1>
+                    </div>
+                    <div class="order-1 rounded-lg shadow-md w-5/12 px-6 py-4" style="background-color: #FF5733;">
+                        <h3 class="font-bold text-white text-xl">First SWOT Analysis</h3>
+                        <p class="text-sm leading-snug tracking-wide text-white text-opacity-100">Developed our foundational framework to help organizations understand their sustainability posture.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
+                        <h1 class="mx-auto font-semibold text-lg text-white">🪩</h1>
+                    </div>
+                    <div class="order-1 rounded-lg shadow-md w-5/12 px-6 py-4" style="background-color: #C70039;">
+                        <h3 class="font-bold text-white text-xl">Community Art Nights</h3>
+                        <p class="text-sm leading-snug tracking-wide text-white text-opacity-100">Moved sustainability conversations from boardrooms to cafés and courtyards.</p>
+                    </div>
+                </div>
+
+                <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
+                        <h1 class="mx-auto text-white font-semibold text-lg">🗺️</h1>
+                    </div>
+                    <div class="order-1 rounded-lg shadow-md w-5/12 px-6 py-4" style="background-color: #900C3F;">
+                        <h3 class="font-bold text-white text-xl">AAHAS Partnership</h3>
+                        <p class="text-sm leading-snug tracking-wide text-white text-opacity-100">Teamed up with our sister NGO to co-create educational programs grounded in local realities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="my-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold" style="color: #581845;">Our Impact by the Numbers</h2>
+                <p class="text-lg text-gray-600 mt-2 max-w-4xl mx-auto">We focus on tangible outcomes. Our work translates into measurable change for the communities and institutions we partner with.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="chart-container">
+                        <canvas id="auditsChart"></canvas>
+                        <div class="stat-number">
+                            <span class="text-4xl font-extrabold" style="color: #900C3F;">50+</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mt-4">Audits Completed</h3>
+                    <p class="text-gray-600 mt-2">Providing organizations with a clear path to sustainability.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="chart-container">
+                        <canvas id="eventsChart"></canvas>
+                        <div class="stat-number">
+                           <span class="text-4xl font-extrabold" style="color: #C70039;">120+</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mt-4">Events Hosted</h3>
+                    <p class="text-gray-600 mt-2">Engaging communities through workshops and open mics.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="chart-container">
+                        <canvas id="peopleChart"></canvas>
+                         <div class="stat-number">
+                           <span class="text-4xl font-extrabold" style="color: #FF5733;">5k+</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mt-4">People Reached</h3>
+                    <p class="text-gray-600 mt-2">Spreading awareness and building a collective movement.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="swot" class="bg-white rounded-lg shadow-md p-8 md:p-12 my-16">
+            <div class="text-center mb-12">
+                 <h2 class="text-4xl font-extrabold" style="color: #581845;">Our Foundational Tool</h2>
+                 <p class="text-lg text-gray-600 mt-2 max-w-4xl mx-auto">Our Sustainability SWOT Analysis provides a 360-degree view, empowering organizations to act with confidence.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-6 rounded-lg border-t-4" style="border-color: #FFC300;">
+                    <h3 class="text-2xl font-bold">Strengths</h3>
+                    <p class="mt-2 text-gray-600">Existing sustainable practices, passionate team members, community trust.</p>
+                </div>
+                <div class="p-6 rounded-lg border-t-4" style="border-color: #C70039;">
+                    <h3 class="text-2xl font-bold">Weaknesses</h3>
+                    <p class="mt-2 text-gray-600">High energy consumption, reliance on single-use plastics, lack of data tracking.</p>
+                </div>
+                <div class="p-6 rounded-lg border-t-4" style="border-color: #FF5733;">
+                    <h3 class="text-2xl font-bold">Opportunities</h3>
+                    <p class="mt-2 text-gray-600">Green grants, local sourcing partnerships, engaging a wider audience online.</p>
+                </div>
+                 <div class="p-6 rounded-lg border-t-4" style="border-color: #900C3F;">
+                    <h3 class="text-2xl font-bold">Threats</h3>
+                    <p class="mt-2 text-gray-600">Regulatory changes, supply chain disruptions, stakeholder skepticism.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="our-works" class="my-16 bg-emerald-50 rounded-lg shadow-md p-8 md:p-12">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold" style="color: #581845;">Our Featured Initiatives</h2>
+                <p class="text-lg text-gray-600 mt-2 max-w-4xl mx-auto">Explore some

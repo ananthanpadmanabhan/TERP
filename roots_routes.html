@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roots & Routes</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4fff7;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, #2e7d32, #43a047);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.3em;
+      font-weight: 300;
+    }
+    main {
+      padding: 40px 20px;
+      max-width: 960px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      color: #2e7d32;
+      margin-bottom: 10px;
+    }
+    .destination-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .destination-buttons button.select-btn {
+      flex: 1 1 30%;
+      padding: 12px;
+      background-color: #e0f2f1;
+      border: 1px solid #2e7d32;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .destination-buttons button.select-btn.selected {
+      background-color: #2e7d32;
+      color: white;
+      font-weight: bold;
+    }
+    button.generate {
+      width: 100%;
+      padding: 14px;
+      background-color: #388e3c;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+    .entrepreneur-card {
+      background: white;
+      border-left: 6px solid #2e7d32;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 15px 0;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .entrepreneur-card:hover {
+      transform: scale(1.02);
+    }
+    .entrepreneur-card h3 {
+      margin: 0 0 10px 0;
+      color: #2e7d32;
+    }
+    .entrepreneur-card p {
+      margin: 4px 0;
+    }
+    #map {
+      height: 420px;
+      margin-top: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Roots & Routes</h1>
+    <p>Discover authentic local experiences along your journey — An initiative by TERP & Kerala Tourism</p>
+  </header>
+  <main>
+    <section>
+      <h2>Select Your Destinations</h2>
+      <p>Choose up to 3 destinations:</p>
+      <div class="destination-buttons">
+        <button class="select-btn" data-destination="Wayanad">Wayanad</button>
+        <button class="select-btn" data-destination="Kumarakom">Kumarakom</button>
+        <button class="select-btn" data-destination="Thekkady">Thekkady</button>
+        <button class="select-btn" data-destination="Kovalam">Kovalam</button>
+        <button class="select-btn" data-destination="Varkala">Varkala</button>
+      </div>
+      <button class="generate" onclick="generateRoute()">Generate Route Map</button>
+    </section>
+
+    <section id="results">
+      <h2>Recommended Local Entrepreneurs</h2>
+      <div id="entrepreneurList"></div>
+      <div id="map"></div>
+    </section>
+  </main>
+
+  <script>
+    const coordinates = {
+      Wayanad: [11.685, 76.132],
+      Kumarakom: [9.617, 76.430],
+      Thekkady: [9.533, 77.116],
+      Kovalam: [8.401, 76.978],
+      Varkala: [8.737, 76.717]
+    };
+
+    const localBusinesses = {
+      Wayanad: [
+        { name: "Anjali's Bamboo Crafts", type: "Crafts", location: "Kalpetta" },
+        { name: "Green Spice Farm", type: "Agri-tourism", location: "Meppadi" }
+      ],
+      Kumarakom: [
+        { name: "Latha's Houseboat Kitchen", type: "Food Experience", location: "Kumarakom Backwaters" },
+        { name: "Amma's Coconut Co-op", type: "Women SME", location: "Kumarakom Village" }
+      ],
+      Thekkady: [
+        { name: "Devi's Cardamom Tour", type: "Spice Plantation", location: "Kumily" },
+        { name: "Jaya's Eco Boutique", type: "Sustainable Fashion", location: "Thekkady Town" }
+      ],
+      Kovalam: [
+        { name: "Sree Yoga & Ayurveda", type: "Wellness", location: "Eve's Beach" },
+        { name: "Meena's Handloom Studio", type: "Handloom", location: "Kovalam Junction" }
+      ],
+      Varkala: [
+        { name: "Ocean View Dyes", type: "Natural Dye Studio", location: "Varkala Cliff" },
+        { name: "Namita's Cultural Café", type: "Café & Storytelling", location: "North Cliff" }
+      ]
+    };
+
+    let map;
+    let routingControl;
+    const selectedDestinations = new Set();
+
+    document.querySelectorAll('.select-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const dest = button.getAttribute('data-destination');
+        if (selectedDestinations.has(dest)) {
+          selectedDestinations.delete(dest);
+          button.classList.remove('selected');
+        } else if (selectedDestinations.size < 3) {
+          selectedDestinations.add(dest);
+          button.classList.add('selected');
+        } else {
+          alert('You can select up to 3 destinations only.');
+        }
+      });
+    });
+
+    function generateRoute() {
+      const selected = Array.from(selectedDestinations);
+      const entrepreneurList = document.getElementById('entrepreneurList');
+      entrepreneurList.innerHTML = '';
+
+      if (selected.length === 0) {
+        alert('Please select at least one destination.');
+        return;
+      }
+
+      selected.forEach(dest => {
+        if (localBusinesses[dest]) {
+          localBusinesses[dest].forEach(biz => {
+            const card = document.createElement('div');
+            card.className = 'entrepreneur-card';
+            card.innerHTML = `<h3>${biz.name}</h3><p><strong>Type:</strong> ${biz.type}</p><p><strong>Location:</strong> ${biz.location}</p>`;
+            entrepreneurList.appendChild(card);
+          });
+        }
+      });
+
+      const waypoints = selected
+        .map(dest => coordinates[dest])
+        .filter(coord => Array.isArray(coord) && coord.length === 2);
+
+      if (waypoints.length === 0) {
+        alert('No valid coordinates found.');
+        return;
+      }
+
+      try {
+        if (!map) {
+          map = L.map('map').setView([10.5, 76.3], 7);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+          }).addTo(map);
+        }
+
+        if (routingControl) {
+          map.removeControl(routingControl);
+        }
+
+        if (waypoints.length === 1) {
+          map.setView(waypoints[0], 10);
+          L.marker(waypoints[0]).addTo(map).bindPopup(selected[0]);
+        } else {
+          routingControl = L.Routing.control({
+            waypoints: waypoints.map(coord => L.latLng(coord)),
+            routeWhileDragging: false,
+            addWaypoints: false,
+            createMarker: function (i, wp) {
+              return L.marker(wp).bindPopup(selected[i] || 'Stop');
+            }
+          }).addTo(map);
+        }
+      } catch (error) {
+        console.error('Map error:', error);
+      }
+    }
+  </script>
+</body>
+</html>
