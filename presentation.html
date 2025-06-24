@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Events in Action – Lessons from Koottam 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light gray-blue background */
+            line-height: 1.6;
+            color: #334155; /* Slate gray text */
+        }
+        .slide {
+            min-height: 100vh; /* Make each slide take full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            border-radius: 1.5rem;
+            background-color: #ffffff; /* White background for slides */
+            position: relative;
+            overflow: hidden; /* Ensure content stays within bounds */
+        }
+        .slide:last-child {
+            margin-bottom: 0;
+        }
+        .slide-title {
+            font-size: 3.5rem;
+            font-weight: 800; /* Extra bold */
+            color: #1a202c; /* Darker text for titles */
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        .slide-subtitle {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 2rem;
+        }
+        .text-section {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.25rem;
+            color: #4a5568;
+        }
+        .kpi-card {
+            background-color: #e2e8f0; /* Lighter gray for KPI cards */
+            padding: 1.5rem 2rem;
+            border-radius: 1rem;
+            margin: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            transition: transform 0.3s ease-in-out;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+        }
+        .kpi-value {
+            font-size: 2.5rem;
+            color: #FF4E50; /* Energetic red from palette */
+            font-weight: 800;
+        }
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #FC913A; /* Energetic orange from palette */
+        }
+        .chart-container {
+            width: 80%;
+            max-width: 700px;
+            height: 350px;
+            margin-top: 2rem;
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+            position: relative; /* For Chart.js responsiveness */
+        }
+        @media (min-width: 768px) {
+            .slide-title {
+                font-size: 4.5rem;
+            }
+            .slide-subtitle {
+                font-size: 2rem;
+            }
+            .text-section {
+                font-size: 1.35rem;
+            }
+            .kpi-value {
+                font-size: 3rem;
+            }
+            .icon {
+                font-size: 4rem;
+            }
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .terp-approach-box {
+            background-color: #edf2f7; /* Light blue-gray */
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+        }
+        .terp-approach-box:hover {
+            transform: translateY(-8px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mx-auto px-4 py-8">
+
+        <!-- Slide 1 -->
+        <section class="slide bg-gradient-to-br from-blue-100 to-indigo-200">
+            <h1 class="slide-title text-blue-800">Sustainable Events in Action</h1>
+            <h2 class="slide-subtitle text-indigo-700">Lessons from Koottam Festival 2025</h2>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
+                <div class="kpi-card bg-blue-50">
+                    <span class="icon text-blue-600">📍</span>
+                    <p class="text-xl font-semibold">Trivandrum, Kerala</p>
+                    <p class="text-gray-600">Event Location</p>
+                </div>
+                <div class="kpi-card bg-indigo-50">
+                    <span class="icon text-indigo-600">🎉</span>
+                    <p class="text-xl font-semibold">6,000+ attendees</p>
+                    <p class="text-gray-600">Community Reach</p>
+                </div>
+                <div class="kpi-card bg-blue-50">
+                    <span class="icon text-blue-600">🗓️</span>
+                    <p class="text-xl font-semibold">2-day event</p>
+                    <p class="text-gray-600">Duration</p>
+                </div>
+            </div>
+            <p class="text-lg mt-8 text-gray-700">A TERP-led Sustainability Assessment showcasing how to reimagine events for a greener tomorrow.</p>
+        </section>
+
+        <!-- Slide 2 -->
+        <section class="slide">
+            <h2 class="slide-title text-gray-900">Why This Matters for Your Event</h2>
+            <div class="text-section mt-8">
+                <p>Cultural events are temporary. Their impact isn't. The Koottam Festival case study clearly demonstrates that even grassroots community festivals can emerge as leaders in climate action.</p>
+                <p class="mt-6 text-2xl font-bold text-teal-600">TERP’s approach is: <br><span class="text-3xl text-orange-500 font-extrabold">Measurable. Scalable. Actionable.</span></p>
+            </div>
+        </section>
+
+        <!-- Slide 3 -->
+        <section class="slide bg-gradient-to-br from-green-50 to-teal-100">
+            <h2 class="slide-title text-green-800">What We Measured</h2>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
+                <div class="kpi-card bg-green-50">
+                    <span class="icon text-green-600">♻️</span>
+                    <h3 class="text-2xl font-bold mb-2">Waste Footprint</h3>
+                    <p class="text-gray-600">On-site waste generation & management.</p>
+                </div>
+                <div class="kpi-card bg-teal-50">
+                    <span class="icon text-teal-600">⚡</span>
+                    <h3 class="text-2xl font-bold mb-2">Diesel Generator Energy Use</h3>
+                    <p class="text-gray-600">Direct emissions from power generation.</p>
+                </div>
+                <div class="kpi-card bg-green-50">
+                    <span class="icon text-green-600">🚗</span>
+                    <h3 class="text-2xl font-bold mb-2">Attendee Travel Emissions</h3>
+                    <p class="text-gray-600">Indirect emissions from participant mobility.</p>
+                </div>
+            </div>
+            <p class="text-lg mt-8 text-gray-700 max-w-2xl">All assessments followed GHG Protocol using India-specific emission factors.</p>
+        </section>
+
+        <!-- Slide 4 -->
+        <section class="slide">
+            <h2 class="slide-title text-gray-900">Key Impact Snapshot</h2>
+            <p class="slide-subtitle">Total Festival Emissions: <span class="kpi-value text-blue-600">10,253 kg CO₂e</span></p>
+            <div class="chart-container">
+                <canvas id="impactSnapshotChart"></canvas>
+            </div>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl">
+                <div class="flex items-center justify-center p-4 bg-red-50 rounded-lg shadow-sm">
+                    <span class="text-2xl mr-2">🗑️</span> <p class="text-lg font-semibold">Waste: <span class="font-bold text-red-600">384 kg CO₂e</span></p>
+                </div>
+                <div class="flex items-center justify-center p-4 bg-orange-50 rounded-lg shadow-sm">
+                    <span class="text-2xl mr-2">⚡</span> <p class="text-lg font-semibold">Energy: <span class="font-bold text-orange-600">3,714 kg CO₂e</span></p>
+                </div>
+                <div class="flex items-center justify-center p-4 bg-yellow-50 rounded-lg shadow-sm">
+                    <span class="text-2xl mr-2">🚗</span> <p class="text-lg font-semibold">Transport: <span class="font-bold text-yellow-600">6,155 kg CO₂e</span></p>
+                </div>
+            </div>
+            <p class="text-lg mt-8 text-gray-700 max-w-2xl">A full-spectrum audit designed for event-scale realities, showing the primary sources of emissions.</p>
+        </section>
+
+        <!-- Slide 5 -->
+        <section class="slide bg-gradient-to-br from-lime-50 to-green-100">
+            <h2 class="slide-title text-lime-800">What Worked – A Blueprint You Can Replicate</h2>
+            <ul class="text-left mt-8 space-y-6 text-xl text-gray-700 max-w-3xl">
+                <li class="flex items-start">
+                    <span class="text-green-500 text-3xl mr-4">✅</span>
+                    <span><span class="font-bold">78% of waste diverted from landfill</span> through effective segregation and volunteer effort.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 text-3xl mr-4">✅</span>
+                    <span><span class="font-bold">Volunteers trained as sustainability stewards</span>, empowering on-site environmental action.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 text-3xl mr-4">✅</span>
+                    <span>Successful adoption of <span class="font-bold">cloth-based, reusable branding</span> and decor, minimizing single-use materials.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-green-500 text-3xl mr-4">✅</span>
+                    <span><span class="font-bold">Emissions tracked across Scopes 1 & 3</span>, providing a clear and comprehensive footprint (Scope 2 was not applicable due to no grid electricity use).</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Slide 6 -->
+        <section class="slide">
+            <h2 class="slide-title text-gray-900">What Didn’t – And What You Can Avoid</h2>
+            <ul class="text-left mt-8 space-y-6 text-xl text-gray-700 max-w-3xl">
+                <li class="flex items-start">
+                    <span class="text-red-500 text-3xl mr-4">❌</span>
+                    <span>Prevalence of <span class="font-bold">multilayer & composite packaging</span> resulted in significant unrecyclable waste.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-red-500 text-3xl mr-4">❌</span>
+                    <span>A <span class="font-bold">diesel-only energy setup</span> led to high per kWh emissions and fuel inefficiency.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-red-500 text-3xl mr-4">❌</span>
+                    <span><span class="font-bold">Lack of shared mobility options</span> meant solo car travel dominated, increasing transport emissions.</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Slide 7 -->
+        <section class="slide bg-gradient-to-br from-purple-50 to-indigo-100">
+            <h2 class="slide-title text-purple-800">The TERP Approach</h2>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-5xl">
+                <div class="terp-approach-box">
+                    <span class="icon text-purple-600">🔬</span>
+                    <h3 class="text-xl font-bold mb-2">Data-first</h3>
+                    <p class="text-lg text-gray-600">Rooted in science, aligned with GHG Protocol for accurate reporting.</p>
+                </div>
+                <div class="terp-approach-box">
+                    <span class="icon text-indigo-600">🧩</span>
+                    <h3 class="text-xl font-bold mb-2">Modular</h3>
+                    <p class="text-lg text-gray-600">Adaptable frameworks for events of any scale and type.</p>
+                </div>
+                <div class="terp-approach-box">
+                    <span class="icon text-purple-600">🤝</span>
+                    <h3 class="text-xl font-bold mb-2">Collaborative</h3>
+                    <p class="text-lg text-gray-600">Works with vendors, volunteers & municipalities for integrated solutions.</p>
+                </div>
+                <div class="terp-approach-box">
+                    <span class="icon text-indigo-600">🧭</span>
+                    <h3 class="text-xl font-bold mb-2">Outcome-driven</h3>
+                    <p class="text-lg text-gray-600">Reports that inform real, measurable climate action and improvement.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8 -->
+        <section class="slide">
+            <h2 class="slide-title text-gray-900">Designing Events with Sustainability Built In</h2>
+            <p class="slide-subtitle">Your event can...</p>
+            <ul class="text-left mt-8 space-y-6 text-xl text-gray-700 max-w-3xl">
+                <li class="flex items-start">
+                    <span class="text-emerald-500 text-3xl mr-4">🌿</span>
+                    <span><span class="font-bold">Divert the majority of waste</span> from landfill, maximizing circularity.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-amber-500 text-3xl mr-4">⚡</span>
+                    <span><span class="font-bold">Optimize generator load and cut emissions</span>, leading to more efficient energy use.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-blue-500 text-3xl mr-4">🚌</span>
+                    <span><span class="font-bold">Enable low-carbon mobility</span> for attendees and staff, reducing transport footprint.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-purple-500 text-3xl mr-4">📊</span>
+                    <span><span class="font-bold">Report emissions transparently</span> to funders, partners, and audiences, enhancing credibility.</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Slide 9 -->
+        <section class="slide bg-gradient-to-br from-cyan-50 to-emerald-100">
+            <h2 class="slide-title text-cyan-800">Ready to Go Green?</h2>
+            <h3 class="slide-subtitle text-emerald-700">With TERP, you get:</h3>
+            <ul class="text-left mt-8 space-y-6 text-xl text-gray-700 max-w-3xl">
+                <li class="flex items-start">
+                    <span class="text-emerald-600 text-3xl mr-4">📊</span>
+                    <span><span class="font-bold">Full-scope emissions audit</span> (Scopes 1–3) tailored to your event.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-emerald-600 text-3xl mr-4">📝</span>
+                    <span><span class="font-bold">Vendor and logistics guidelines</span> customized for your specific operations.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-emerald-600 text-3xl mr-4">📣</span>
+                    <span><span class="font-bold">Audience engagement tools</span> for fostering climate literacy and participation.</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-emerald-600 text-3xl mr-4">🔄</span>
+                    <span><span class="font-bold">Year-on-year tracking</span> for continuous improvement and impact reporting.</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Slide 10 -->
+        <section class="slide">
+            <h2 class="slide-title text-gray-900">Let’s Reimagine Your Event Together</h2>
+            <div class="text-section mt-8">
+                <p class="text-2xl text-green-600 font-bold mb-4">🌱 Environmental accountability isn’t a burden — it’s your edge.</p>
+                <p class="text-xl text-gray-700">Partner with TERP to design events that are as sustainable as they are unforgettable.</p>
+            </div>
+            <div class="mt-12">
+                <p class="text-lg font-semibold text-blue-700">Contact TERP today to start your sustainability journey!</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const impactData = {
+            labels: ['Waste', 'Energy', 'Transport'],
+            datasets: [{
+                label: 'Emissions (kg CO₂e)',
+                data: [384, 3714, 6155],
+                backgroundColor: ['#FF4E50', '#FC913A', '#F9D423'], // Energetic & Playful palette
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        };
+
+        const impactOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            return tooltipItems[0].label;
+                        },
+                        label: function(tooltipItem) {
+                            return `${tooltipItem.dataset.label}: ${tooltipItem.raw} kg CO₂e`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: '#ebf4ff'
+                    },
+                    ticks: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(document.getElementById('impactSnapshotChart'), {
+            type: 'bar',
+            data: impactData,
+            options: impactOptions
+        });
+    </script>
+</body>
+</html>
