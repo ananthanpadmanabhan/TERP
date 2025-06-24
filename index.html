@@ -19,8 +19,8 @@
 
         <header class="text-center my-12">
             <div class="flex items-center justify-center mb-4">
-                <!-- Updated src to a relative path for GitHub deployment -->
-                <img src="logo final conv 1.jpeg" alt="TERP Project Logo" class="h-16 md:h-20 mr-4">
+                <!-- Applied grayscale filter to the logo for better integration -->
+                <img src="logo final conv 1.jpeg" alt="TERP Project Logo" class="h-16 md:h-20 mr-4 grayscale hover:grayscale-0 transition-all duration-300">
                 <h1 class="text-5xl md:text-6xl font-extrabold" style="color: #581845;">THE EARTH REIMAGINED PROJECT</h1>
             </div>
             <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-6">"We don’t just talk about change — we build it into everyday life, one community at a time."</p>
@@ -169,4 +169,73 @@
         <section id="our-works" class="my-16 bg-emerald-50 rounded-lg shadow-md p-8 md:p-12">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-extrabold" style="color: #581845;">Our Featured Initiatives</h2>
-                <p class="text-lg text-gray-600 mt-2 max-w-4xl mx-auto">Explore some
+                <p class="text-lg text-gray-600 mt-2 max-w-4xl mx-auto">Explore some of our key projects and reports that demonstrate our commitment to tangible impact.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-2xl font-bold mb-3" style="color: #900C3F;">Koottam Sustainability Report</h3>
+                    <p class="text-gray-700 mb-4">A comprehensive report detailing the sustainability audit and recommendations for the Koottam community, highlighting actionable insights and measurable progress.</p>
+                    <a href="koottam25report.html" target="_blank" class="inline-block bg-emerald-700 text-white font-semibold py-2 px-6 rounded-full hover:bg-emerald-800 transition-colors">View Report</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h3 class="text-2xl font-bold mb-3" style="color: #C70039;">Roots & Routes Initiative</h3>
+                    <p class="text-gray-700 mb-4">An innovative tourism experience planner, developed in partnership with Kerala Tourism, focused on connecting travelers with local women-led and small-scale entrepreneurs.</p>
+                    <a href="roots_routes.html" target="_blank" class="inline-block bg-emerald-700 text-white font-semibold py-2 px-6 rounded-full hover:bg-emerald-800 transition-colors">Explore Initiative</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center my-12">
+            <h2 class="text-3xl font-bold mb-4" style="color: #581845;">Let's Work Together</h2>
+            <p class="text-lg text-gray-600 mb-6">We're always looking for new collaborators to expand our impact.</p>
+            <a href="mailto:info@terpproject.org" class="bg-blue-900 text-white font-bold py-3 px-8 rounded-full transition duration-300" style="background-color: #581845; color: #fff;">Contact Us</a>
+        </footer>
+
+    </main>
+
+    <script>
+        function createStatChart(canvasId, value, total, color) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'Goal'],
+                    datasets: [{
+                        data: [value, total - value],
+                        backgroundColor: [color, '#e5e7eb'],
+                        borderWidth: 0,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '80%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            enabled: false,
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                      return label.join(' ');
+                                    } else {
+                                      return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        window.onload = function() {
+            createStatChart('auditsChart', 50, 75, '#900C3F');
+            createStatChart('eventsChart', 120, 150, '#C70039');
+            createStatChart('peopleChart', 5000, 7500, '#FF5733');
+        };
+    </script>
+</body>
+</html>
