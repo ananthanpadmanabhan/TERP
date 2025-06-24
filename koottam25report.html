@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koottam Festival 2025 - Sustainability Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 40vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+                max-height: 50vh;
+            }
+        }
+        .kpi-value {
+            font-weight: 900;
+            color: #FF4E50;
+        }
+        .section-intro {
+            max-width: 48rem;
+        }
+        .insight-box {
+            background-color: #fff9f0; /* Lighter shade of orange from palette */
+            border-left: 4px solid #FC913A;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #5d4a3b;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #FC913A;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 2s linear infinite;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-6xl font-black text-gray-900 tracking-tight">The Footprint of a Festival</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600">A Visual Dive into the Koottam 2025 Sustainability Report</p>
+            <div class="mt-8 bg-white rounded-2xl shadow-lg p-8 inline-block">
+                <p class="text-gray-600 text-lg">Grand Total Emissions</p>
+                <p class="kpi-value text-6xl md:text-7xl tracking-tighter">10,253.10 <span class="text-4xl text-gray-500 font-semibold">kg CO₂e</span></p>
+            </div>
+        </header>
+
+        <section id="breakdown" class="my-16 text-center">
+            <h2 class="text-3xl font-bold text-gray-900">Where Did The Emissions Come From?</h2>
+            <p class="mt-2 text-md text-gray-600 mx-auto section-intro">The festival's total carbon footprint is a sum of its parts. Energy from diesel generators was the largest contributor, followed by attendee transportation. Waste management had the smallest direct impact, but tells an important story about material choices.</p>
+            <div class="mt-8 chart-container">
+                <canvas id="totalEmissionsChart"></canvas>
+            </div>
+        </section>
+
+        <div class="w-full h-px bg-gray-200 my-16"></div>
+
+        <section id="waste" class="my-16">
+            <h2 class="text-3xl font-bold text-gray-900 text-center">The Waste Story: A Tale of Diversion & Debris</h2>
+            <p class="mt-2 text-md text-gray-600 mx-auto text-center section-intro">The festival generated 273.3 kg of waste. An impressive volunteer effort led to a high diversion rate, but non-recyclable items like multi-layer plastics remain a challenge.</p>
+            
+            <div class="mt-8 bg-white rounded-2xl shadow-lg p-8 inline-block text-center mb-8">
+                <p class="text-gray-600 text-lg">Total Waste Emissions</p>
+                <p class="kpi-value text-5xl">383.79 <span class="text-3xl text-gray-500 font-semibold">kg CO₂e</span></p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 items-center">
+                <div class="bg-white p-6 rounded-2xl shadow-lg">
+                    <h3 class="text-xl font-bold text-center mb-4">Total Waste by Material (kg)</h3>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="wasteCompositionChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-8">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg text-center">
+                        <p class="text-gray-600 text-lg">Waste Diversion Rate</p>
+                        <p class="kpi-value text-6xl">77.88%</p>
+                        <p class="text-gray-500 mt-1">of waste was diverted from landfill through recycling & composting.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-lg">
+                         <h3 class="text-xl font-bold text-center mb-4">Emissions from Waste (kg CO₂e)</h3>
+                         <div class="chart-container" style="height: 250px;">
+                            <canvas id="wasteEmissionsChart"></canvas>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-8 text-center text-gray-600">While cloth was the heaviest waste item, landfilled multi-layer plastic was the single largest source of waste-related emissions, highlighting the hidden climate cost of non-recyclable materials.</p>
+        </section>
+
+        <div class="w-full h-px bg-gray-200 my-16"></div>
+
+        <section id="energy" class="my-16">
+            <h2 class="text-3xl font-bold text-gray-900 text-center">Powering the Pulse: Energy Footprint</h2>
+            <p class="mt-2 text-md text-gray-600 mx-auto text-center section-intro">With no access to grid electricity, the festival relied entirely on diesel generators, consuming 1,386 litres of fuel to produce 10,060 kWh of power. This was the largest source of direct emissions.</p>
+
+            <div class="mt-8 bg-white rounded-2xl shadow-lg p-8 inline-block text-center mb-8">
+                <p class="text-gray-600 text-lg">Total Energy Emissions</p>
+                <p class="kpi-value text-5xl">3,714.48 <span class="text-3xl text-gray-500 font-semibold">kg CO₂e</span></p>
+            </div>
+
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-center mb-4">Total GHG Emissions by Area (kg CO₂e)</h3>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="energyEmissionsChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-600 mt-4">The main hall was the most energy-intensive zone, responsible for over half of all energy emissions.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-lg flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-center mb-4">Generator Efficiency (kg CO₂e per kWh)</h3>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="energyEfficiencyChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-600 mt-4">Lower bars are better. The higher emissions per kWh for Ground areas suggest generators were running inefficiently, likely underloaded.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="w-full h-px bg-gray-200 my-16"></div>
+
+        <section id="transport" class="my-16">
+             <h2 class="text-3xl font-bold text-gray-900 text-center">The Journey to Koottam: Transport Footprint</h2>
+            <p class="mt-2 text-md text-gray-600 mx-auto text-center section-intro">Attendee travel is a major, though indirect, part of the festival's footprint. Data from 69 attendees was scaled to the estimated 6,000 visitors to project the total impact.</p>
+            
+            <div class="mt-8 bg-white rounded-2xl shadow-lg p-8 inline-block text-center mb-8">
+                <p class="text-gray-600 text-lg">Total Attendee Transport Emissions</p>
+                <p class="kpi-value text-5xl">6,154.83 <span class="text-3xl text-gray-500 font-semibold">kg CO₂e</span></p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-12">
+                <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-lg">
+                    <h3 class="text-xl font-bold text-center mb-4">How Attendees Traveled</h3>
+                    <div class="chart-container">
+                        <canvas id="transportModeChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-600 mt-4">Two-wheelers were the most popular mode of transport, but a significant number of attendees drove alone.</p>
+                </div>
+                <div class="lg:col-span-3 bg-white p-6 rounded-2xl shadow-lg">
+                    <h3 class="text-xl font-bold text-center mb-4">Share of Total Transport Emissions</h3>
+                     <div class="w-full h-full min-h-[350px] md:min-h-[400px]" id="transportEmissionsTreemap"></div>
+                     <p class="text-center text-gray-600 mt-4">Despite only 25% of attendees using them, solo car journeys were responsible for nearly half of all transport emissions, demonstrating their high carbon intensity.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="w-full h-px bg-gray-200 my-16"></div>
+
+        <section id="recommendations" class="my-16">
+            <h2 class="text-3xl font-bold text-gray-900 text-center">The Path Forward</h2>
+            <p class="mt-2 text-md text-gray-600 mx-auto text-center section-intro">This audit provides a baseline for improvement. Future editions of Koottam can become even more sustainable by focusing on these key areas.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <div class="text-3xl font-bold text-center mb-4" style="color: #FF4E50;">♻️</div>
+                    <h3 class="text-xl font-bold text-center mb-3">Waste Reduction</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Phase out multi-layer plastic packaging with vendors.</li>
+                        <li>Create a system to collect and reuse cloth banners.</li>
+                        <li>Reduce printed media by using QR codes for information.</li>
+                    </ul>
+                    <button id="wasteInsightBtn" class="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-all duration-300">
+                        ✨ Get More Insights
+                    </button>
+                    <div id="wasteInsightOutput" class="insight-box hidden"></div>
+                </div>
+                 <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <div class="text-3xl font-bold text-center mb-4" style="color: #FC913A;">⚡️</div>
+                    <h3 class="text-xl font-bold text-center mb-3">Energy Efficiency</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Implement load planning to right-size generators.</li>
+                        <li>Consolidate power zones to reduce the number of generators.</li>
+                        <li>Schedule generator use to eliminate idle running time.</li>
+                    </ul>
+                    <button id="energyInsightBtn" class="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-all duration-300">
+                        ✨ Get More Insights
+                    </button>
+                    <div id="energyInsightOutput" class="insight-box hidden"></div>
+                </div>
+                 <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <div class="text-3xl font-bold text-center mb-4" style="color: #F9D423;">🚗</div>
+                    <h3 class="text-xl font-bold text-center mb-3">Greener Travel</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Promote and incentivize carpooling and shared rides.</li>
+                        <li>Provide secure bicycle parking at the venue.</li>
+                        <li>Partner for shuttle services from key city hubs.</li>
+                    </ul>
+                    <button id="travelInsightBtn" class="mt-6 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-all duration-300">
+                        ✨ Get More Insights
+                    </button>
+                    <div id="travelInsightOutput" class="insight-box hidden"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-16 py-8 border-t border-gray-200">
+            <p class="text-gray-600">Infographic based on the Koottam Festival 2025 Sustainability Assessment by <span class="font-semibold">The Earth Reimagined Project (TERP)</span>.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        const vibrantPalette = ['#FF4E50', '#FC913A', '#F9D423', '#4CAF50', '#2196F3', '#9C27B0'];
+        const tooltipPlugin = {
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        return Array.isArray(label) ? label.join(' ') : label;
+                    }
+                }
+            }
+        };
+
+        function wrapLabel(label, maxWidth = 16) {
+            if (label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        }
+
+        async function getGeminiInsight(prompt, outputElement, buttonElement) {
+            outputElement.innerHTML = '<div class="loading-spinner"></div> Loading insight...';
+            outputElement.classList.remove('hidden');
+            buttonElement.disabled = true;
+
+            try {
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    outputElement.innerHTML = text;
+                } else {
+                    outputElement.innerHTML = 'Failed to get insight. Please try again.';
+                }
+            } catch (error) {
+                console.error('Error fetching Gemini insight:', error);
+                outputElement.innerHTML = `Error: ${error.message}. Could not retrieve insight.`;
+            } finally {
+                buttonElement.disabled = false;
+            }
+        }
+
+        document.getElementById('wasteInsightBtn').addEventListener('click', () => {
+            const prompt = "Based on the Koottam Festival 2025 Sustainability Report's 'Waste' section and its recommendations (Eliminate non-recyclable packaging, Strengthen textile recovery systems, Digitise printed communication, Track vendor waste performance), provide one concise, actionable, and creative additional suggestion for improving waste management, focusing on audience engagement or material innovation. Keep it to one short paragraph.";
+            getGeminiInsight(prompt, document.getElementById('wasteInsightOutput'), document.getElementById('wasteInsightBtn'));
+        });
+
+        document.getElementById('energyInsightBtn').addEventListener('click', () => {
+            const prompt = "Considering the Koottam Festival 2025 Sustainability Report's 'Energy' section and its recommendations (Right-size generator deployment, Consolidate power zones, Track energy data digitally, Avoid idle usage), generate one concise, actionable, and creative additional suggestion for further enhancing energy efficiency, perhaps involving community participation or technology integration. Keep it to one short paragraph.";
+            getGeminiInsight(prompt, document.getElementById('energyInsightOutput'), document.getElementById('energyInsightBtn'));
+        });
+
+        document.getElementById('travelInsightBtn').addEventListener('click', () => {
+            const prompt = "Drawing from the Koottam Festival 2025 Sustainability Report's 'Transportation' section and its recommendations (Encourage carpooling and shared mobility, Provide bike and public transit support, Improve attendee transport data collection, Explore shuttle partnerships), suggest one concise, actionable, and creative additional strategy to reduce attendee travel emissions, focusing on innovative incentives or infrastructure. Keep it to one short paragraph.";
+            getGeminiInsight(prompt, document.getElementById('travelInsightOutput'), document.getElementById('travelInsightBtn'));
+        });
+
+
+        new Chart(document.getElementById('totalEmissionsChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Energy (Diesel)', ['Attendee', 'Transport'], 'Waste'],
+                datasets: [{
+                    label: 'Total Emissions (kg CO₂e)',
+                    data: [3714.48, 6154.83, 383.79],
+                    backgroundColor: [vibrantPalette[1], vibrantPalette[0], vibrantPalette[3]],
+                    borderColor: '#f8fafc',
+                    borderWidth: 4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    ...tooltipPlugin
+                },
+                cutout: '60%'
+            }
+        });
+
+        const wasteCompositionLabels = ['Plastic', 'Cloth', 'Paper', ['Paper &', 'Plastic'], 'Organic', 'Glass'];
+        new Chart(document.getElementById('wasteCompositionChart'), {
+            type: 'bar',
+            data: {
+                labels: wasteCompositionLabels.map(l => Array.isArray(l) ? l : wrapLabel(l)),
+                datasets: [{
+                    label: 'Waste Weight (kg)',
+                    data: [72.3, 63, 59, 15, 34, 30],
+                    backgroundColor: [vibrantPalette[0], vibrantPalette[1], vibrantPalette[2], vibrantPalette[4], vibrantPalette[3], vibrantPalette[5]],
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                     ...tooltipPlugin
+                }
+            }
+        });
+
+        const wasteEmissionLabels = [['Plastic (ML)', 'Landfill'], 'Cloth', 'Paper', 'Organic', ['Plastic (SL)', 'Recycled'], 'Glass'];
+        new Chart(document.getElementById('wasteEmissionsChart'), {
+            type: 'bar',
+            data: {
+                labels: wasteEmissionLabels.map(l => Array.isArray(l) ? l : wrapLabel(l)),
+                datasets: [{
+                    label: 'Emissions (kg CO₂e)',
+                    data: [136.5, 94.5, 53.1, 51, 48.24, 0.45],
+                    backgroundColor: vibrantPalette[0],
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                     ...tooltipPlugin
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('energyEmissionsChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Hall', 'Ground', ['Lights and', 'Sound'], ['Ground', 'Lights'], ['Spare', 'Generator']],
+                datasets: [{
+                    label: 'GHG Emissions (kg CO₂e)',
+                    data: [2026.08, 857.6, 361.8, 268, 201],
+                    backgroundColor: vibrantPalette[1],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                     ...tooltipPlugin
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const energyEfficiencyLabels = [['Ground', 'Lights'], 'Ground', 'Hall', ['Lights and', 'Sound'], ['Spare', 'Generator']];
+        new Chart(document.getElementById('energyEfficiencyChart'), {
+            type: 'bar',
+            data: {
+                labels: energyEfficiencyLabels.map(l => Array.isArray(l) ? l : wrapLabel(l)),
+                datasets: [{
+                    label: 'Emissions per kWh (kg CO₂e/kWh)',
+                    data: [0.43, 0.43, 0.35, 0.35, 0.32],
+                    backgroundColor: vibrantPalette[0],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                     ...tooltipPlugin
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'kg CO₂e per kWh (Lower is better)' }
+                    }
+                }
+            }
+        });
+
+        const transportModeLabels = ['Two-wheeler', ['Personal Car', '(Solo)'], ['Public', 'Transport'], ['Carpool /', 'Shared Ride'], 'Auto'];
+        new Chart(document.getElementById('transportModeChart'), {
+            type: 'pie',
+            data: {
+                labels: transportModeLabels,
+                datasets: [{
+                    label: 'Mode Share (%)',
+                    data: [42.0, 24.6, 14.5, 10.1, 4.4],
+                    backgroundColor: [vibrantPalette[1], vibrantPalette[0], vibrantPalette[3], vibrantPalette[2], vibrantPalette[4]],
+                    borderColor: '#f8fafc',
+                    borderWidth: 4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    ...tooltipPlugin
+                }
+            }
+        });
+
+        const treemapData = [{
+            type: 'treemap',
+            labels: ["Personal Car (Solo)", "Two-wheeler", "Public Transport", "Carpool/Shared Ride", "College Bus", "Auto"],
+            parents: ["", "", "", "", "", ""],
+            values: [2738.09, 1505.22, 1489.78, 219.13, 108.7, 93.91],
+            textinfo: "label+value+percent root",
+            marker: {
+                colors: [vibrantPalette[0], vibrantPalette[1], vibrantPalette[2], vibrantPalette[3], vibrantPalette[4], vibrantPalette[5]]
+            }
+        }];
+
+        const layout = {
+            margin: {l: 0, r: 0, b: 0, t: 0},
+        };
+        
+        Plotly.newPlot('transportEmissionsTreemap', treemapData, layout, {responsive: true});
+
+    </script>
+</body>
+</html>
