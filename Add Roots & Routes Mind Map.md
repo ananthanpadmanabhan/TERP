@@ -1,53 +1,52 @@
-```mermaid
 mindmap
   root((Roots & Routes: Web Platform for Responsible Tourism in Kerala))
     Introduction
-      [cite_start]Celebrated for natural beauty, cultural richness, hospitality [cite: 16]
-      [cite_start]Mainstream circuits often overlook deeply rooted practices, communities, and entrepreneurs [cite: 17]
-      [cite_start]Transforms tourism to be responsible, inclusive, experiential [cite: 18]
-      [cite_start]Supports local livelihoods, especially women-led and indigenous enterprises [cite: 18]
-    [cite_start]Project Vision (Digital Matchmaking Platform) [cite: 20]
-      [cite_start]Connects travellers with authentic, underrepresented local experiences and businesses [cite: 20]
+      Celebrated for natural beauty, cultural richness, hospitality
+      Mainstream circuits often overlook deeply rooted practices, communities, and entrepreneurs
+      Transforms tourism to be responsible, inclusive, experiential
+      Supports local livelihoods, especially women-led and indigenous enterprises
+    Project Vision (Digital Matchmaking Platform)
+      Connects travellers with authentic, underrepresented local experiences and businesses
       Aims to
-        [cite_start]Promote community-based tourism and cultural preservation [cite: 22]
-        [cite_start]Offer curated route map based on selected destinations [cite: 23]
-        [cite_start]Feature verified, women-led and local SMEs (traditional crafts, eco-stays, sustainable food, wellness, etc.) [cite: 24]
-        [cite_start]Encourage equitable economic growth within Kerala’s tourism economy [cite: 25]
-    [cite_start]How It Works [cite: 26]
-      [cite_start]Traveller Portal: Users select desired destinations across Kerala from a list of options [cite: 27]
-      [cite_start]Route Generation: The system creates a travel route with optimized logistics [cite: 28]
-      [cite_start]SME Integration: Verified local businesses that lie along or near the route are highlighted with detailed profiles (photos, stories, services) [cite: 29]
-      [cite_start]Experiential Suggestions: Travellers receive suggestions to explore traditional practices like coir making, Aranmula mirror crafting, handloom weaving, or organic farm stays [cite: 30]
+        Promote community-based tourism and cultural preservation
+        Offer curated route map based on selected destinations
+        Feature verified, women-led and local SMEs (traditional crafts, eco-stays, sustainable food, wellness, etc.)
+        Encourage equitable economic growth within Kerala’s tourism economy
+    How It Works
+      Traveller Portal: Users select desired destinations across Kerala from a list of options
+      Route Generation: The system creates a travel route with optimized logistics
+      SME Integration: Verified local businesses that lie along or near the route are highlighted with detailed profiles (photos, stories, services)
+      Experiential Suggestions: Travellers receive suggestions to explore traditional practices like coir making, Aranmula mirror crafting, handloom weaving, or organic farm stays
       Snapshots
-        [cite_start]Options for the tourist to choose their destinations (Figure 1) [cite: 32]
-        [cite_start]Selecting three destinations, in this case, Wayanad, Thekkady, and Varkala, the tourist can click on “Generate route map” (Figure 2) [cite: 33]
-        [cite_start]The portal will provide a list of pre-approved and pre-verified local businesses (Figure 3) [cite: 34]
-        [cite_start]Along with the list, a curated map with businesses marked for their convenient travel (in this picture, the businesses are not marked; this is only a preliminary sample.) (Figure 4) [cite: 35]
-    [cite_start]Entrepreneur Registration & Verification [cite: 36]
-      [cite_start]A dedicated entrepreneur registration portal will be available on the website [cite: 37]
-      [cite_start]Interested businesses, collectives, and homestays are invited to submit their information [cite: 38]
-      [cite_start]A field team (in collaboration with local tourism offices or accredited agencies) will physically verify each applicant to ensure authenticity and quality [cite: 39]
-      [cite_start]Once verified, they will be geo-tagged and featured on the travel route platform [cite: 40]
-    [cite_start]Key Features of the Platform [cite: 41]
-      [cite_start]Interactive Kerala map with destination buttons [cite: 42]
-      [cite_start]Dynamic routing with stop suggestions [cite: 43]
-      [cite_start]Entrepreneur cards with story-based content and contact info [cite: 44]
-      [cite_start]Local language support for registration and listings [cite: 45]
-      [cite_start]Admin dashboard for verification, content management, and analytics [cite: 46]
-    [cite_start]Target Impact [cite: 47]
-      [cite_start]Women-led SMEs: Provide visibility and business growth opportunities [cite: 48]
-      [cite_start]Rural & indigenous communities: Unlock access to new customer bases [cite: 49]
-      [cite_start]Travellers: Gain a deeper, more meaningful Kerala experience [cite: 50]
-      [cite_start]Tourism Department: Strengthen its responsible tourism mission with a measurable, inclusive impact [cite: 51]
-    [cite_start]Implementation Timeline [cite: 52]
-      [cite_start]Phase 1: Platform design, SME onboarding framework (Month 1–2) [cite: 53]
-      [cite_start]Phase 2: Pilot in 3–4 districts (e.g., Wayanad, Alappuzha, Pathanamthitta) (Month 3–4) [cite: 53]
-      [cite_start]Phase 3: Public launch + continuous SME registration (Month 5) [cite: 53]
-    [cite_start]Support Requested [cite: 54]
-      [cite_start]Technical and outreach collaboration with the Kerala Tourism Department [cite: 55]
-      [cite_start]Permission to access regional tourism data and local DMO support for verification [cite: 56]
-      [cite_start]Funding or in-kind support for platform development and field verification [cite: 57]
-    [cite_start]Conclusion [cite: 58]
-      [cite_start]Roots & Routes is more than a digital tool; it is a platform for Kerala’s untold stories, forgotten skills, and grassroots entrepreneurship [cite: 59]
-      [cite_start]By helping travellers discover Kerala’s true roots through curated routes, we ensure tourism becomes a tool for preservation, empowerment, and sustainable development [cite: 60]
-      [cite_start]We look forward to partnering with the Kerala Tourism Department to bring this vision to life [cite: 61]
+        Options for the tourist to choose their destinations (Figure 1)
+        Selecting three destinations, in this case, Wayanad, Thekkady, and Varkala, the tourist can click on “Generate route map” (Figure 2)
+        The portal will provide a list of pre-approved and pre-verified local businesses (Figure 3)
+        Along with the list, a curated map with businesses marked for their convenient travel (in this picture, the businesses are not marked; this is only a preliminary sample.) (Figure 4)
+    Entrepreneur Registration & Verification
+      A dedicated entrepreneur registration portal will be available on the website
+      Interested businesses, collectives, and homestays are invited to submit their information
+      A field team (in collaboration with local tourism offices or accredited agencies) will physically verify each applicant to ensure authenticity and quality
+      Once verified, they will be geo-tagged and featured on the travel route platform
+    Key Features of the Platform
+      Interactive Kerala map with destination buttons
+      Dynamic routing with stop suggestions
+      Entrepreneur cards with story-based content and contact info
+      Local language support for registration and listings
+      Admin dashboard for verification, content management, and analytics
+    Target Impact
+      Women-led SMEs: Provide visibility and business growth opportunities
+      Rural & indigenous communities: Unlock access to new customer bases
+      Travellers: Gain a deeper, more meaningful Kerala experience
+      Tourism Department: Strengthen its responsible tourism mission with a measurable, inclusive impact
+    Implementation Timeline
+      Phase 1: Platform design, SME onboarding framework (Month 1–2)
+      Phase 2: Pilot in 3–4 districts (e.g., Wayanad, Alappuzha, Pathanamthitta) (Month 3–4)
+      Phase 3: Public launch + continuous SME registration (Month 5)
+    Support Requested
+      Technical and outreach collaboration with the Kerala Tourism Department
+      Permission to access regional tourism data and local DMO support for verification
+      Funding or in-kind support for platform development and field verification
+    Conclusion
+      Roots & Routes is more than a digital tool; it is a platform for Kerala’s untold stories, forgotten skills, and grassroots entrepreneurship
+      By helping travellers discover Kerala’s true roots through curated routes, we ensure tourism becomes a tool for preservation, empowerment, and sustainable development
+      We look forward to partnering with the Kerala Tourism Department to bring this vision to life
