@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Featured Initiatives | TERP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --red: #e74c3c;
+            --orange: #e67e22;
+            --purple: #9b59b6;
+            --green: #27ae60;
+            --yellow: #f1c40f;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--red), var(--orange), var(--purple), var(--green), var(--yellow));
+            border-radius: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .initiatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .initiative-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .initiative-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+        }
+        
+        .card-header.red::before { background-color: var(--red); }
+        .card-header.orange::before { background-color: var(--orange); }
+        .card-header.purple::before { background-color: var(--purple); }
+        .card-header.green::before { background-color: var(--green); }
+        .card-header.yellow::before { background-color: var(--yellow); }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .card-subtitle {
+            font-size: 1rem;
+            color: var(--secondary);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .card-body {
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        .card-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .section-content {
+            padding-left: 1.5rem;
+        }
+        
+        .highlights {
+            list-style-type: none;
+        }
+        
+        .highlights li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .highlights li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        .summary-note {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        .summary-note h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .summary-note p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .summary-note ul {
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .summary-note li {
+            background: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .summary-note li i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--secondary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .initiatives-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .summary-note ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Our Featured Initiatives</h1>
+            <p class="subtitle">Showcasing TERP's multidimensional work at the intersection of sustainability, community, and education</p>
+        </header>
+        
+        <div class="initiatives-grid">
+            <!-- Initiative 1 -->
+            <div class="initiative-card">
+                <div class="card-header red">
+                    <h2 class="card-title">Koottam Sustainability Assessment</h2>
+                    <p class="card-subtitle">Technical Sustainability Tools</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-info-circle"></i> Summary
+                        </div>
+                        <div class="section-content">
+                            Conducted at the 2025 Koottam Festival in Trivandrum, this assessment involved a detailed sustainability audit focusing on waste, energy, and transportation impacts. Using European Sustainability Reporting Standards (ESRS), TERP developed practical, low-carbon recommendations for future event planning.
+                        </div>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-lightbulb"></i> Relevance
+                        </div>
+                        <div class="section-content">
+                            Showcases TERP’s ability to apply technical assessment frameworks in live, large-scale public contexts.
+                        </div>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-star"></i> Key Highlights
+                        </div>
+                        <div class="section-content">
+                            <ul class="highlights">
+                                <li>3-day on-ground observation, 6,000+ footfall</li>
+                                <li>Identified diesel generator inefficiencies and waste segregation challenges</li>
+                                <li>Actionable roadmap submitted to organizers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Initiative 2 -->
+            <div class="initiative-card">
+                <div class="card-header orange">
+                    <h2 class="card-title">Roots &amp; Routes</h2>
+                    <p class="card-subtitle">Sustainable Travel Planning Initiative</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-info-circle"></i> Summary
+                        </div>
+                        <div class="section-content">
+                            Roots &amp; Routes is a flagship initiative by TERP designed to reimagine tourism as a low-impact, community-driven experience. Through a map-based digital interface, the tool helps travelers generate custom itineraries that include not just scenic destinations, but verified, women-led and local enterprises — from tribal craft hubs to community cafés.
+                        </div>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-lightbulb"></i> Relevance
+                        </div>
+                        <div class="section-content">
+                            Roots &amp; Routes can be easily adapted to the Nilgiris context to promote eco-cultural tourism, support indigenous livelihoods, and highlight forest-based micro-enterprises in a curated, visitor-friendly format.
+                        </div>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-star"></i> Key Highlights
+                        </div>
+                        <div class="section-content">
+                            <ul class="highlights">
+                                <li>Lightweight, mobile-first web tool</li>
+                                <li>Highlights experiential stops like homestays, crafts, and forest-based services</li>
+                                <li>Combines storytelling, geographic mapping, and micro-enterprise visibility</li>
+                                <li>Built in collaboration with student teams and grassroots networks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Initiative 3 -->
+            <div class="initiative-card">
+                <div class="card-header purple">
+                    <h2 class="card-title">Open Mic Night</h2>
+                    <p class="card-subtitle">"Our Only Home"</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-info-circle"></i> Summary
+                        </div>
+                        <div class="section-content">
+                            Scheduled for August 16th at Eve’s Café in Trivandrum, this event invites musicians, poets, and storytellers to reflect on the theme "Our Only Home", blending environmental consciousness with performance art. In partnership with Playfolio.
+                        </div>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-lightbulb"></i> Relevance
+                        </div>
+                        <div class="section-content">
+                            An expressive format to initiate climate conversations through local culture, art, and shared emotion.
+                        </div>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-star"></i> Anticipated Highlights
+                        </div>
+                        <div class="section-content">
+                            <ul class="highlights">
+                                <li>Youth and artist-led</li>
+                                <li>Themes: memory, belonging, climate grief</li>
+                                <li>A soft entry into climate activism for non-technical audiences</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Initiative 4 -->
+            <div class="initiative-card">
+                <div class="card-header green">
+                    <h2 class="card-title">Unmute</h2>
+                    <p class="card-subtitle">Youth &amp; Sustainability Dialogue Series</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-info-circle"></i> Summary
+                        </div>
+                        <div class="section-content">
+                            This campus-based dialogue series invited students and experts to openly discuss pressing issues — from mental health to sustainable fashion. The events were held in Trivandrum and co-designed with youth participants.
+                        </div>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-lightbulb"></i> Relevance
+                        </div>
+                        <div class="section-content">
+                            Enables peer-to-peer sustainability literacy and low-cost, high-impact engagement with university communities.
+                        </div>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-star"></i> Key Highlights
+                        </div>
+                        <div class="section-content">
+                            <ul class="highlights">
+                                <li>Student moderation + participation</li>
+                                <li>Formats include open floor + panel mix</li>
+                                <li>Strong interest from academic institutions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Initiative 5 -->
+            <div class="initiative-card">
+                <div class="card-header yellow">
+                    <h2 class="card-title">Chayakkodu</h2>
+                    <p class="card-subtitle">Tribal Arts &amp; Education Residency</p>
+                </div>
+                <div class="card-body">
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-info-circle"></i> Summary
+                        </div>
+                        <div class="section-content">
+                            A mural art and environmental education residency held at a tribal LP school in Kannur district. Through art, students explored themes of forest, identity, and ecological relationships, leaving behind a permanent visual narrative on their school wall.
+                        </div>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-lightbulb"></i> Relevance
+                        </div>
+                        <div class="section-content">
+                            Bridges sustainability with cultural preservation and participatory education — a model that can be scaled across rural schools in ecologically sensitive districts.
+                        </div>
+                    </div>
+                    
+                    <div class="card-section">
+                        <div class="section-title">
+                            <i class="fas fa-star"></i> Key Highlights
+                        </div>
+                        <div class="section-content">
+                            <ul class="highlights">
+                                <li>Worked with tribal educators and artists</li>
+                                <li>Thematic sessions on nature, kinship, and climate</li>
+                                <li>Expected Output: a wall-sized mural + oral storytelling project</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="summary-note">
+            <h2>Our Approach</h2>
+            <p>These initiatives reflect TERP’s multidimensional work at the intersection of technical sustainability, community arts, and educational partnerships. Together, they offer a portfolio of scalable, locally adaptable formats for sustainability outreach and impact delivery, across both urban and rural contexts.</p>
+            
+            <ul>
+                <li><i class="fas fa-tools"></i> Technical Sustainability Tools</li>
+                <li><i class="fas fa-palette"></i> Community Arts and Dialogue</li>
+                <li><i class="fas fa-graduation-cap"></i> Educational Partnerships</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <footer>
+        <p>© 2023 TERP - Transforming Environments through Responsible Practices</p>
+    </footer>
+    
+    <script>
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
+</body></html>
