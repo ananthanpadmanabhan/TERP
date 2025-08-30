@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C3K – Climate Champions for Coastal Kerala</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #0A9396, #005F73);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center my-8 md:my-12">
+            <h1 class="text-4xl md:text-6xl font-black gradient-text">C3K: Climate Champions for Coastal Kerala</h1>
+            <p class="text-lg md:text-xl text-gray-600 mt-4 max-w-3xl mx-auto">Resilient Shores: A Three-Phase Action Plan for clean, safe, and self-reliant coasts.</p>
+        </header>
+
+        <main>
+            <section id="pillars" class="mb-12 md:mb-20">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-[#005F73]">The Three-Phase Action Plan</h2>
+                <div class="grid grid-cols-1 gap-8">
+                    
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-4">
+                            <div class="text-5xl mr-4">🌊</div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-[#0A9396]">Phase 1: Pride & Protection – “Our Beach, Our Identity”</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                            <div>
+                                <h4 class="text-xl font-bold text-[#005F73] mb-2">Activities</h4>
+                                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                    <li>Weekly Beach Walks with Sannadha Sena, students, and youth clubs → light cleaning + spotting waste hotspots.</li>
+                                    <li>Art for Awareness: Murals and installations made from old boats and tires.</li>
+                                    <li>Social Media Movement: Regular posts with the tag “Our Shore, Our Pride”.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-[#005F73] mb-2">Citizen Science Monitoring</h4>
+                                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                    <li>Shoreline Width Measurement by students each month.</li>
+                                    <li>Water Testing of sea water and nearby wells for pH, salinity, and clarity.</li>
+                                    <li>Results shared on Panchayath notice boards and online as “Our Shore in Numbers”.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-[#005F73] mb-2">Responsibility & Outcomes</h4>
+                                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                    <li>Sannadha Sena organizes walks. Schools lead citizen science. Panchayath provides supplies.</li>
+                                    <li>Outcomes: Clean, monitored beach; youth leadership; monthly scientific data.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-4">
+                            <div class="text-5xl mr-4">🤝</div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-[#EE9B00]">Phase 2: Sustenance & Self-Reliance – “Work from the Waves”</h3>
+                        </div>
+                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                             <div>
+                                <h4 class="text-xl font-bold text-[#005F73] mb-2">Activities</h4>
+                                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                    <li>Community Fish Processing/Drying Unit run by SHGs or youth groups.</li>
+                                    <li>Revenue-Sharing Model: 70–80% for members, 20–30% for beach upkeep.</li>
+                                    <li>Branding: “Coastal Kerala Climate Smart Products” promoted through various channels.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-[#005F73] mb-2">Integration & Responsibility</h4>
+                                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                    <li>Every product packet carries a message about keeping the beach clean.</li>
+                                    <li>Unit earnings support citizen science kits.</li>
+                                    <li>Panchayath provides land. SHGs/Youth manage the unit. Fisheries Dept. provides training.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-[#005F73] mb-2">Outcomes</h4>
+                                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                    <li>New livelihoods for women and youth.</li>
+                                    <li>Reliable funding stream for beach upkeep.</li>
+                                    <li>An economic model tied to coastal pride.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <div class="flex items-center mb-4">
+                            <div class="text-5xl mr-4">🛡️</div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-[#AE2012]">Phase 3: Safety & Resilience – “Strong Shore, Strong People”</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                            <div>
+                                <h4 class="text-xl font-bold text-[#005F73] mb-2">Activities</h4>
+                                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                    <li>Bi-annual Mock Drills for floods/cyclones.</li>
+                                    <li>Swimming Lessons for children and volunteers.</li>
+                                    <li>First Aid Training on CPR and basic emergency response.</li>
+                                    <li>Emergency Contact Network: WhatsApp groups and public boards with helplines.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-[#005F73] mb-2">Responsibility & Outcomes</h4>
+                                <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                    <li>Sannadha Sena are core volunteers. Schools mobilize students. Panchayath links with district authorities.</li>
+                                    <li>Outcomes: A disaster-ready community; youth trained as first responders; confident families.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="citizen-science" class="mb-12 md:mb-20 bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-[#005F73]">Citizen Science: Our Shore in Numbers</h2>
+                <p class="text-gray-600 text-center mb-10 max-w-2xl mx-auto">Our youth and students will act as citizen scientists, measuring shoreline width and testing water quality to monitor coastal change over time. The line chart below shows hypothetical data reflecting the need for action against erosion and rising salinity.</p>
+                <div class="chart-container">
+                    <canvas id="citizenScienceChart"></canvas>
+                </div>
+            </section>
+
+            <section id="sustain" class="mb-12 md:mb-20 bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-[#005F73] mb-4">Work from the Waves: Revenue Sharing</h2>
+                        <p class="text-gray-600 mb-6">The community fish processing unit ensures our project is self-sustaining. Profits are reinvested back into the community—providing livelihoods for members while funding crucial beach upkeep and environmental projects.</p>
+                        <div class="flex items-center mb-2">
+                            <div class="w-4 h-4 rounded-full bg-[#0A9396] mr-3"></div>
+                            <span class="font-semibold">70-80% for Livelihoods & Operations</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 rounded-full bg-[#E9D8A6] mr-3"></div>
+                            <span class="font-semibold">20-30% for Beach Upkeep Fund</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="profitShareChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="roadmap-advantages" class="mb-12 md:mb-20">
+                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <h2 class="text-3xl md:text-4xl font-bold text-center text-[#005F73] mb-8">Pilot Year Roadmap</h2>
+                        <div class="relative pl-8">
+                            <div class="absolute left-0 top-0 bottom-0 w-1 bg-[#94D2BD] rounded"></div>
+                            <div class="mb-8 relative">
+                                <div class="absolute -left-[42px] top-0 w-8 h-8 bg-[#0A9396] rounded-full border-4 border-white flex items-center justify-center text-white font-bold">1</div>
+                                <h4 class="text-xl font-bold text-gray-800">Months 1–2: Launch</h4>
+                                <p class="text-gray-600">Start beach walks, murals, and monitoring.</p>
+                            </div>
+                            <div class="mb-8 relative">
+                                <div class="absolute -left-[42px] top-0 w-8 h-8 bg-[#EE9B00] rounded-full border-4 border-white flex items-center justify-center text-white font-bold">2</div>
+                                <h4 class="text-xl font-bold text-gray-800">Months 3–4: Activation</h4>
+                                <p class="text-gray-600">Launch fish unit and connect revenue-sharing to upkeep.</p>
+                            </div>
+                             <div class="mb-8 relative">
+                                <div class="absolute -left-[42px] top-0 w-8 h-8 bg-[#AE2012] rounded-full border-4 border-white flex items-center justify-center text-white font-bold">3</div>
+                                <h4 class="text-xl font-bold text-gray-800">Month 6: Safety First</h4>
+                                <p class="text-gray-600">First disaster drill and swimming training.</p>
+                            </div>
+                            <div class="mb-8 relative">
+                                <div class="absolute -left-[42px] top-0 w-8 h-8 bg-[#EE9B00] rounded-full border-4 border-white flex items-center justify-center text-white font-bold">4</div>
+                                <h4 class="text-xl font-bold text-gray-800">Months 7–11: Parallel Scaling</h4>
+                                <p class="text-gray-600">Continue all three activities in parallel; scale livelihood unit.</p>
+                            </div>
+                             <div class="relative">
+                                <div class="absolute -left-[42px] top-0 w-8 h-8 bg-[#0A9396] rounded-full border-4 border-white flex items-center justify-center text-white font-bold">5</div>
+                                <h4 class="text-xl font-bold text-gray-800">Month 12: Review & Scale</h4>
+                                <p class="text-gray-600">Second drill + public exhibition of data + community review.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                        <h2 class="text-3xl md:text-4xl font-bold text-center text-[#005F73] mb-8">Special Advantages</h2>
+                        <div class="bg-[#94D2BD] bg-opacity-30 rounded-lg p-6 mb-6">
+                            <h4 class="text-2xl font-bold text-[#005F73] mb-2">Parallel Execution</h4>
+                            <p class="text-gray-700">All three phases can run at the same time. Beautification, livelihood, and preparedness don’t need to wait for each other, accelerating impact.</p>
+                        </div>
+                        <div class="bg-[#94D2BD] bg-opacity-30 rounded-lg p-6 mb-6">
+                            <h4 class="text-2xl font-bold text-[#005F73] mb-2">Adaptability</h4>
+                            <p class="text-gray-700">Panchayaths can emphasize what matters most locally. The framework is flexible to fit different coastal realities (tourism vs. fishing vs. flood-prone).</p>
+                        </div>
+                        <div class="bg-[#94D2BD] bg-opacity-30 rounded-lg p-6">
+                            <h4 class="text-2xl font-bold text-[#005F73] mb-2">Scalability</h4>
+                            <p class="text-gray-700">Once proven in one panchayath, the model can be expanded across coastal Kerala.</p>
+                        </div>
+                    </div>
+                 </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 md:mt-20 py-8 border-t border-gray-200">
+            <h3 class="text-2xl font-bold text-[#005F73]">This is more than a plan.</h3>
+            <p class="text-gray-600 mt-2">It's a blueprint for local communities to lead their own climate resilience efforts, building a safer and prouder future for all.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const citizenScienceCtx = document.getElementById('citizenScienceChart').getContext('2d');
+        new Chart(citizenScienceCtx, {
+            type: 'line',
+            data: {
+                labels: ['Month 1', 'Month 3', 'Month 5', 'Month 7', 'Month 9', 'Month 12'],
+                datasets: [
+                    {
+                        label: 'Shoreline Width (meters)',
+                        data: [125, 120, 118, 115, 112, 110],
+                        borderColor: '#0A9396',
+                        backgroundColor: 'rgba(10, 147, 150, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Water Salinity (ppt)',
+                        data: [30, 31, 32, 33, 33.5, 34],
+                        borderColor: '#AE2012',
+                        backgroundColor: 'rgba(174, 32, 18, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                }
+            }
+        });
+        
+        const profitShareCtx = document.getElementById('profitShareChart').getContext('2d');
+        new Chart(profitShareCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Livelihoods & Operations', 'Beach Upkeep Fund'],
+                datasets: [{
+                    label: 'Profit Distribution',
+                    data: [75, 25],
+                    backgroundColor: [
+                        '#0A9396',
+                        '#E9D8A6'
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 4,
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback,
+                             label: function(context) {
+                                return context.parsed + '%';
+                            }
+                        },
+                        bodyFont: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        padding: 12,
+                        cornerRadius: 8,
+                        displayColors: false,
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
+```
