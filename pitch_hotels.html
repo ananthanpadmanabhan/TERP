@@ -3,288 +3,70 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TERP — Pitch for Hotels</title>
+  <title>TERP — Pitch Desk</title>
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="logo_favicon2.png">
-  <!-- Tailwind CDN for quick upload; replace with build-time Tailwind for production -->
+
+  <!-- Tailwind CDN (works perfectly on GitHub Pages) -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --terp-primary: #2C5F2D;
-      --terp-secondary: #97BC62;
-      --terp-accent: #EA7317;
-      --terp-bg: #F2F5EA;
-      --terp-surface: #FFFFFF;
-      --terp-text: #1F2937;
-      --terp-muted: #6B7280;
-      --terp-light: #E5E7EB;
+    body { font-family: 'Inter', sans-serif; }
+    .focus-ring:focus {
+      outline: 3px solid rgba(88, 24, 69, 0.12);
+      outline-offset: 3px;
     }
-    html,body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
-    /* small focus-visible helper for keyboard users */
-    .focus-ring:focus { outline: 3px solid rgba(234,115,23,0.18); outline-offset: 3px; }
-    /* subtle dot background used in primary block */
-    .globe-bg { opacity: .06; pointer-events:none; }
-    .pill-icon { background-color: rgba(44,95,45,0.06); border-radius: .5rem; padding: .5rem; display:inline-flex; align-items:center; justify-content:center; }
-    /* accessibility: prefer larger hit area for small icons */
-    a[role="button"] { -webkit-tap-highlight-color: transparent; }
   </style>
 </head>
-<body class="bg-[color:var(--terp-bg)] text-[color:var(--terp-text)] antialiased">
 
-  <main class="max-w-6xl mx-auto p-6 md:p-12">
+<body class="bg-gray-100 text-gray-800">
 
-    <!-- HERO -->
-    <header class="text-center max-w-3xl mx-auto space-y-6 pt-6">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide bg-white/80 border border-gray-200 shadow-sm" style="color:var(--terp-primary);">
-        <!-- hotel icon (simple SVG) -->
-        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" class="flex-shrink-0">
-          <path d="M3 11v7h18v-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-          <path d="M7 11V5h10v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-        Hospitality Solutions
-      </div>
+  <main class="container mx-auto p-6 md:p-12">
 
-      <h1 class="text-3xl md:text-4xl font-extrabold leading-tight" style="color:var(--terp-primary);">
-        Sustainability as Strategic Advantage — reduce costs, protect assets, win guests.
-      </h1>
-
-      <p class="text-base md:text-lg text-[color:var(--terp-muted)]">
-        Move sustainability from checkbox to operational asset: measurable savings, lower risk, and credibility guests notice.
-      </p>
+    <!-- Header -->
+    <header class="text-center mb-8">
+      <h1 class="text-4xl md:text-5xl font-extrabold" style="color:#581845;">Pitch Desk</h1>
+      <p class="text-gray-600 mt-2">Choose a pitch to explore.</p>
     </header>
 
-    <!-- URGENCY / PROBLEM -->
-    <section class="mt-8 bg-white rounded-2xl p-6 md:p-10 border border-gray-100 shadow-sm grid md:grid-cols-12 gap-6 items-start">
-      <div class="md:col-span-5 relative">
-        <div aria-hidden="true" class="absolute -top-4 -left-4 w-20 h-20 rounded-full opacity-20" style="background-color:var(--terp-accent);"></div>
-        <h2 class="text-2xl font-bold" style="color:var(--terp-text);">Move beyond broad commitments.</h2>
-        <p class="mt-3 text-[color:var(--terp-muted)]">
-          Guests and investors demand evidence. We embed measurable sustainability into core operations so you can show impact and protect margins.
+    <!-- Pitch Buttons Section -->
+    <section id="pitch-list" class="bg-white rounded-lg shadow-md min-h-[40vh] p-8">
+      <div class="max-w-3xl mx-auto flex flex-col items-center gap-4">
+
+        <!-- Hotels & Resorts Pitch Button -->
+        <a
+          href="pitch_hotels.html"
+          aria-label="Open Hotels and Resorts pitch"
+          class="w-full md:w-auto inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-gray-200 text-gray-800 font-semibold hover:bg-gray-300 transition-colors shadow-md focus-ring"
+        >
+          <!-- Icon -->
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M3 11v7h18v-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M7 11V5h10v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <span>Hotels &amp; Resorts</span>
+        </a>
+
+        <!-- Placeholder / Instructions -->
+        <p class="text-sm text-gray-500 mt-6 text-center max-w-xl">
+          You can add more pitch pages anytime. Just upload new <code>.html</code> files
+          (for example, <code>pitch_festivals.html</code>, <code>pitch_schools.html</code>)
+          and link them here.
         </p>
-      </div>
 
-      <div class="md:col-span-7 grid grid-cols-2 gap-4">
-        <div class="p-4 bg-gray-50 rounded-lg">
-          <!-- trending up icon -->
-          <div class="mb-2" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M3 17l6-6 4 4 8-8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <p class="font-bold text-sm">Asset Resilience</p>
-          <p class="text-xs text-[color:var(--terp-muted)]">Future-proof property value</p>
-        </div>
-        <div class="p-4 bg-gray-50 rounded-lg">
-          <!-- users icon -->
-          <div class="mb-2" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M16 11a4 4 0 1 0-8 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <p class="font-bold text-sm">Guest Trust</p>
-          <p class="text-xs text-[color:var(--terp-muted)]">Evidence-backed brand stories</p>
-        </div>
       </div>
     </section>
 
-    <!-- THREE PILLARS -->
-    <section class="mt-10">
-      <div class="text-center mb-8">
-        <h3 class="text-sm font-bold uppercase tracking-widest text-[color:var(--terp-muted)]">We study your full footprint</h3>
-        <p class="text-[color:var(--terp-muted)] max-w-2xl mx-auto mt-2">Environmental insight, social inclusion, and economic value — the pillars that shape actionable plans.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- Environmental -->
-        <article aria-labelledby="pillar-environmental" class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-          <div class="flex items-start justify-between mb-4">
-            <div class="pill-icon" aria-hidden="true" title="Environmental">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <path d="M12 3c2 2 4 3 6 3-2 1-3 3-3 5-2-2-4-4-6-6 1-1 1-2 3-2z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M5 20c3-2 6-3 11-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <span class="text-xs font-bold uppercase text-[color:var(--terp-muted)] px-2 py-1 rounded bg-gray-50">The Ecosystem</span>
-          </div>
-
-          <h4 id="pillar-environmental" class="text-lg font-bold mb-3">Environmental</h4>
-          <p class="text-sm text-[color:var(--terp-muted)] mb-4">Map energy, water and waste flows; identify targeted interventions that protect biodiversity and lower resource use.</p>
-
-          <ul class="space-y-2 text-sm text-[color:var(--terp-text)]">
-            <li class="flex items-start gap-3"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.2"/></svg> Clear emissions profile</li>
-            <li class="flex items-start gap-3"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.2"/></svg> Efficiency roadmaps</li>
-            <li class="flex items-start gap-3"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.2"/></svg> Biodiversity care</li>
-          </ul>
-        </article>
-
-        <!-- Social -->
-        <article aria-labelledby="pillar-social" class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-          <div class="flex items-start justify-between mb-4">
-            <div class="pill-icon" aria-hidden="true" title="Social">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <span class="text-xs font-bold uppercase text-[color:var(--terp-muted)] px-2 py-1 rounded bg-gray-50">The Community</span>
-          </div>
-
-          <h4 id="pillar-social" class="text-lg font-bold mb-3">Social</h4>
-          <p class="text-sm text-[color:var(--terp-muted)] mb-4">Design local sourcing, staff skill programmes and partnerships so your property benefits the local economy.</p>
-
-          <ul class="space-y-2 text-sm text-[color:var(--terp-text)]">
-            <li class="flex items-start gap-3">Local supplier pathways</li>
-            <li class="flex items-start gap-3">Staff training & retention</li>
-            <li class="flex items-start gap-3">Inclusive value chains</li>
-          </ul>
-        </article>
-
-        <!-- Economic -->
-        <article aria-labelledby="pillar-economic" class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-          <div class="flex items-start justify-between mb-4">
-            <div class="pill-icon" aria-hidden="true" title="Economic">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                <path d="M3 17h18M8 12v5M12 8v9M16 4v13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <span class="text-xs font-bold uppercase text-[color:var(--terp-muted)] px-2 py-1 rounded bg-gray-50">The Business</span>
-          </div>
-
-          <h4 id="pillar-economic" class="text-lg font-bold mb-3">Economic</h4>
-          <p class="text-sm text-[color:var(--terp-muted)] mb-4">Translate sustainability into measurable returns — lower operating costs, mitigated risk, stronger brand positioning.</p>
-
-          <ul class="space-y-2 text-sm text-[color:var(--terp-text)]">
-            <li class="flex items-start gap-3">Projected cost savings</li>
-            <li class="flex items-start gap-3">Risk reduction</li>
-            <li class="flex items-start gap-3">Investor-ready reporting</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <!-- STANDARDS -->
-    <section class="mt-10">
-      <div class="flex items-center gap-4 mb-6">
-        <span class="h-px flex-1 bg-gray-300"></span>
-        <h4 class="text-sm font-bold uppercase tracking-widest text-center text-[color:var(--terp-muted)]">Globally aligned, locally rooted</h4>
-        <span class="h-px flex-1 bg-gray-300"></span>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm text-center">
-          <div class="mb-3" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2v20" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-          </div>
-          <h5 class="font-semibold mb-2">UN SDGs</h5>
-          <div class="text-xs text-[color:var(--terp-muted)]">Decent work · Responsible consumption · Climate action</div>
-        </div>
-
-        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm text-center">
-          <div class="mb-3" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2l2 6h6l-4.9 3.6L18 20l-6-4-6 4 1.9-8.4L3 8h6z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h5 class="font-semibold mb-2">Certification Ready</h5>
-          <div class="text-xs text-[color:var(--terp-muted)]">GSTC · Green Key · EarthCheck</div>
-        </div>
-
-        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm text-center">
-          <div class="mb-3" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 0 0 0 20" stroke="currentColor" stroke-width="1.2"/></svg>
-          </div>
-          <h5 class="font-semibold mb-2">Reporting</h5>
-          <div class="text-xs text-[color:var(--terp-muted)]">ESRS/BRSR · Scope 1/2/3 · Impact verification</div>
-        </div>
-      </div>
-
-      <p class="text-center mt-6 text-sm text-[color:var(--terp-muted)] italic">We structure your data so you're ready for certification, not just conversation.</p>
-    </section>
-
-    <!-- DELIVERABLE / CASES -->
-    <section class="mt-10 relative rounded-2xl overflow-hidden text-white" style="background-color:var(--terp-primary);">
-      <div class="absolute inset-0 globe-bg" aria-hidden="true">
-        <!-- simple globe-like pattern -->
-        <svg width="100%" height="100%" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice">
-          <circle cx="520" cy="350" r="300" fill="white" />
-        </svg>
-      </div>
-
-      <div class="relative z-10 p-6 md:p-10 grid md:grid-cols-2 gap-6 items-start">
-        <div>
-          <div class="inline-block px-3 py-1 rounded border border-white/30 text-xs font-bold uppercase tracking-widest mb-4">The deliverable</div>
-          <h3 class="text-2xl font-bold mb-3">A polished, evidence-backed sustainability report</h3>
-          <p class="text-white/90 mb-4">A document your guests, investors and partners can trust — backed by data, aligned with global benchmarks and ready to act on.</p>
-
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Investor-grade data clarity</li>
-            <li class="flex items-start gap-3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> A 1–3 year operational roadmap</li>
-            <li class="flex items-start gap-3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Verified alignment with tourism & sustainability standards</li>
-          </ul>
-        </div>
-
-        <div class="bg-white/7 backdrop-blur-sm rounded-xl p-5 border border-white/20">
-          <div class="flex items-center gap-3 mb-3">
-            <!-- file-check icon -->
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div>
-              <h4 class="font-bold">Backed by experience</h4>
-              <div class="text-xs uppercase tracking-wider text-white/70">From festivals to pilot resort audits</div>
-            </div>
-          </div>
-
-          <p class="text-sm text-white/80 italic mb-4">We turn operations into measurable impact — the same rigor we bring to events and government work applies to your property.</p>
-
-          <ul class="text-white/90 space-y-2 text-sm mb-4">
-            <li class="flex items-start gap-3"><strong class="w-36">Festival audit</strong> 18% fuel reduction via optimized generator scheduling</li>
-            <li class="flex items-start gap-3"><strong class="w-36">Resort pilot</strong> Projected 12% annual energy savings after LED & inverter upgrades</li>
-          </ul>
-
-          <div class="mt-4 flex gap-2" aria-hidden="true">
-            <div class="h-1 w-full bg-white/30 rounded-full"></div>
-            <div class="h-1 w-full bg-white/30 rounded-full"></div>
-            <div class="h-1 w-full bg-white rounded-full"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <footer class="mt-10 text-center max-w-xl mx-auto pb-12">
-      <h4 class="text-xl font-bold mb-4">Ready to audit your impact?</h4>
-
-      <a
-        href="contactus.html?source=pitch-hotels"
-        role="button"
-        aria-label="Request a sample sustainability report from TERP"
-        class="inline-flex items-center gap-3 px-6 py-3 rounded-full text-white font-semibold text-sm shadow-lg focus-ring"
-        style="background-color:var(--terp-accent);"
-      >
-        <span>Request a Sample Report</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 5l6 7-6 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-
-      <p class="mt-4 text-sm text-[color:var(--terp-muted)]">See the clarity and depth we bring to every project.</p>
+    <!-- Footer -->
+    <footer class="text-center mt-10 text-sm text-gray-600">
+      <a href="index.html" class="underline">← Back to homepage</a>
     </footer>
-
-    <!-- backlink -->
-    <div class="text-center mt-6">
-      <a href="pitch_deck.html" class="text-sm text-[color:var(--terp-primary)] underline">← Back to Pitch Desk</a>
-    </div>
 
   </main>
 
-  <!-- Small accessibility enhancements -->
-  <script>
-    // Add keyboard focus styles for mouse users who focus via keyboard
-    (function () {
-      function handleFirstTab(e) {
-        if (e.key === 'Tab') {
-          document.documentElement.classList.add('user-is-tabbing');
-          window.removeEventListener('keydown', handleFirstTab);
-        }
-      }
-      window.addEventListener('keydown', handleFirstTab);
-    })();
-  </script>
 </body>
 </html>
