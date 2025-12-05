@@ -5,14 +5,11 @@
   <title>TERP — Hotels & Resorts Pitch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- HTM + Preact UMD -->
   <script src="https://unpkg.com/htm@3.1.1/dist/htm.umd.js"></script>
   <script src="https://unpkg.com/preact@10.15.1/dist/preact.umd.js"></script>
 
-  <!-- Lucide UMD (IMPORTANT: this one works in browser) -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <style>
@@ -25,10 +22,10 @@
 
   <div id="app"></div>
 
-  <!-- DO NOT USE type="module" -->
   <script>
-    const { html } = htmPreact;
-    const { h, render } = preact;
+    // --- 1. SETUP: Bind htm to Preact ---
+    const { h, render, useEffect } = preact;
+    const html = htm.bind(h);
 
     const theme = {
       primary:"#1A4D2E",
@@ -38,6 +35,9 @@
       muted:"#64748B"
     };
 
+    // --- 2. COMPONENTS ---
+
+    // Icon helper that creates an <i> tag for Lucide to target
     const Icon = (name, size=28, color=theme.primary) =>
       html`<i data-lucide="${name}" style="width:${size}px;height:${size}px;color:${color};"></i>`;
 
@@ -80,7 +80,14 @@
       </div>
     `;
 
-    const App = () => html`
+    // --- 3. MAIN APP ---
+    const App = () => {
+      // This hook ensures icons are drawn every time the UI updates
+      useEffect(() => {
+        lucide.createIcons();
+      });
+
+      return html`
       <div class="max-w-6xl mx-auto p-6 md:p-12 space-y-28">
 
         <header class="text-center space-y-6 pt-10">
@@ -194,11 +201,9 @@
         </footer>
       </div>
     `;
+    };
 
     render(h(App), document.getElementById("app"));
-
-    // Activate icons
-    lucide.createIcons();
   </script>
 
 </body>
