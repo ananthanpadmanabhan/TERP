@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>TERP — Luxury Hospitality Audit Pitch</title>
+  <title>TERP — Luxury Hospitality Sustainability Assessment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -69,7 +69,7 @@
       </div>
     `;
 
-    // A step in the audit process visual
+    // A step in the process visual
     const ProcessStep = ({ number, title, desc, icon, isLast }) => html`
       <div class="relative flex gap-6 group">
         ${!isLast && html`<div class="absolute left-8 top-16 bottom-0 w-0.5 bg-gray-200 group-hover:bg-emerald-200 transition-colors"></div>`}
@@ -99,20 +99,20 @@
             <div class="max-w-5xl mx-auto text-center relative z-10">
                 <div class="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-gold text-sm font-bold tracking-widest uppercase">
                     ${Icon("diamond", 16, theme.gold)}
-                    For Prestige Profiles
+                    Strategic Hospitality Consulting
                 </div>
                 <h1 class="text-5xl md:text-7xl heading font-extrabold leading-tight mb-8">
-                    The New Standard of Luxury <br/> is <span class="text-gold">Regenerative.</span>
+                    The Definitive <span class="text-gold">Sustainability Assessment</span> <br/> for Luxury Portfolios.
                 </h1>
                 <p class="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed mb-10">
-                    For iconic brands, sustainability is no longer about compliance. It is the ultimate indicator of quality, longevity, and operational intelligence.
+                    We help iconic properties like yours move beyond compliance. Turn your environmental data into a verified competitive advantage.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
                     <button class="px-8 py-4 rounded-full bg-gold text-emerald-950 font-bold text-lg hover:bg-white transition shadow-lg hover:shadow-gold/20 flex items-center gap-2">
-                        Schedule Executive Briefing
+                        Schedule an Assessment
                         ${Icon("arrow-right", 20)}
                     </button>
-                    <p class="text-sm text-gray-300">Move beyond the baseline.</p>
+                    <p class="text-sm text-gray-300">Confidential. Data-driven. Global.</p>
                 </div>
             </div>
         </div>
@@ -144,7 +144,7 @@
                         <div class="bg-gray-50 p-8 rounded-2xl border-2 border-dashed border-gray-200 relative">
                             <div class="absolute -top-4 -left-4 bg-gold text-white px-4 py-1 font-bold text-sm rounded-full uppercase tracking-widest">The TERP Reality Check</div>
                             <p class="heading text-2xl font-bold text-emerald-900 mb-4">We turn existential risk into verifiable asset value.</p>
-                            <p class="text-gray-600">A TERP audit doesn't just count carbon. It stress-tests your operations against future climate risks and market demands, providing a data-backed roadmap to leadership.</p>
+                            <p class="text-gray-600">A TERP Assessment doesn't just count carbon. It stress-tests your operations against future climate risks and market demands, providing a data-backed roadmap to leadership.</p>
                             <div class="mt-6 flex gap-4">
                                 ${Icon("shield-check", 32, theme.primary)}
                                 ${Icon("bar-chart-4", 32, theme.primary)}
@@ -161,13 +161,13 @@
             <div class="max-w-5xl mx-auto">
                 ${SectionHeader({
                     subtitle: "Our Methodology",
-                    title: "The 360° Audit Roadmap: From Data to Dominance"
+                    title: "The 360° Assessment Roadmap: From Data to Dominance"
                 })}
 
                 <div class="grid md:grid-cols-5 gap-8 items-start">
                     <div class="md:col-span-2 bg-white p-8 rounded-2xl shadow-sm border top-8 sticky">
                         <h3 class="heading text-2xl font-bold mb-4 text-emerald-900">A Forensic Approach to Hospitality</h3>
-                        <p class="text-gray-600 mb-6">We don't rely on checklists. We deploy a rigorous, multi-disciplinary analysis of your property's entire ecosystem.</p>
+                        <p class="text-gray-600 mb-6">We don't rely on check-boxes. We deploy a rigorous, multi-disciplinary analysis of your property's entire ecosystem.</p>
                         <p class="text-gray-600 font-medium">The outcome is clarity. You will know exactly where you stand and precisely how to lead.</p>
                         <div class="mt-8 p-4 bg-emerald-50 rounded-xl border border-emerald-100 flex items-center gap-3">
                             ${Icon("clock", 24, theme.primary)}
@@ -234,13 +234,13 @@
                             ${Icon("lock", 36, theme.gold)}
                         </div>
                         <h3 class="heading text-2xl font-bold mb-4 text-gray-900">Future-Proof Compliance</h3>
-                        <p class="text-gray-600 leading-relaxed">Stay ahead of rapidly evolving global regulations and reporting mandates. Our audit prepares your data infrastructure for seamless ESG reporting to investors and regulators.</p>
+                        <p class="text-gray-600 leading-relaxed">Stay ahead of rapidly evolving global regulations and reporting mandates. Our assessment prepares your data infrastructure for seamless ESG reporting to investors and regulators.</p>
                     </div>
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-6 mt-16">
                     ${StatCard({ number: "15-30%", label: "Typical Energy Savings Identified", icon: "zap" })}
-                    ${StatCard({ number: "100%", label: "Audit Data Verifiability", icon: "check-circle-2" })}
+                    ${StatCard({ number: "100%", label: "Assessment Data Verifiability", icon: "check-circle-2" })}
                     ${StatCard({ number: "Premium", label: "Guest Segment Attraction", icon: "users" })}
                 </div>
             </div>
@@ -271,7 +271,7 @@
                     Your property is an asset.<br/>Is it a resilient one?
                 </h2>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Don't wait for regulations or public opinion to force your hand. Lead the market with a TERP sustainability audit.
+                    Don't wait for regulations or public opinion to force your hand. Lead the market with a TERP Sustainability Assessment.
                 </p>
                 <div class="pt-8">
                     <button class="group relative overflow-hidden px-12 py-5 rounded-full bg-luxury-gradient text-white text-lg font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
