@@ -1,13 +1,19 @@
+/**
+ * @file ServiceResortPitch.jsx
+ * @description A high-impact, premium sustainability pitch deck for luxury hospitality brands.
+ * Designed with a "pristine" aesthetic using deep greens and bronze accents.
+ * * @component ResortPitch
+ * @requires lucide-react For iconography
+ * @requires tailwindcss For styling
+ */
+
 import React from 'react';
 import { 
-  Trees, 
   Users, 
   TrendingUp, 
   FileCheck, 
-  Hotel, 
   CheckCircle2, 
   ArrowRight,
-  Droplet,
   Globe,
   Award,
   Leaf,
@@ -20,37 +26,51 @@ import {
 } from 'lucide-react';
 
 // --- 🎨 THEME CONFIGURATION 🎨 ---
-// Adjusted for a more premium, pristine feel with deep greens and sophisticated bronze accents.
+// Centralized theme object for easy rebranding.
+// In a full production app, these colors could be moved to tailwind.config.js
 const theme = {
   colors: {
-    primary: "#1A4D2E", // Deep Forest Green (More serious/premium)
-    secondary: "#4F8A5E", // Sophisticated Sage Green
-    accent: "#A87B50", // Muted Bronze/Clay (Less saturated, more elegant)
-    background: "#F9FAF8", // Ultra-light, clean background
-    surface: "#FFFFFF", // Pure White
-    text: "#1F2937", // Deep Charcoal for text
-    muted: "#64748B", // Cool Gray for subtitles
-    light: "#E2E8F0"  // Subtle border gray
+    primary: "#1A4D2E",    // Deep Forest Green (Trust/Premium)
+    secondary: "#4F8A5E",  // Sage Green (Balance/Nature)
+    accent: "#A87B50",     // Muted Bronze (Luxury/Warmth)
+    background: "#F9FAF8", // Ultra-light off-white (Cleanliness)
+    surface: "#FFFFFF",    // Pure White
+    text: "#1F2937",       // Deep Charcoal
+    muted: "#64748B",      // Cool Gray
+    light: "#E2E8F0"       // Subtle borders
   },
   fonts: {
+    // These font stacks assume standard system fonts. 
+    // For production, consider importing a Google Font like 'Playfair Display' for headings.
     heading: "ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif",
     body: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
   }
 };
 
+/**
+ * LuxuryCard Component
+ * Used for the "Three Pillars" section. Features a subtle hover animation and gradient border.
+ */
 const LuxuryCard = ({ icon: Icon, title, sub, description, points }) => (
   <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col h-full hover:shadow-xl transition-all duration-500 relative overflow-hidden group">
     {/* Subtle top accent gradient */}
-    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ backgroundImage: `linear-gradient(to right, ${theme.colors.primary}, ${theme.colors.secondary})` }}></div>
+    <div 
+      className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500" 
+      style={{ backgroundImage: `linear-gradient(to right, ${theme.colors.primary}, ${theme.colors.secondary})` }}
+    />
     
     <div className="flex items-start justify-between mb-6">
       <div className="p-3 rounded-xl bg-opacity-10 backdrop-blur-sm" style={{ backgroundColor: `${theme.colors.primary}10` }}>
         <Icon size={28} color={theme.colors.primary} />
       </div>
-      <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full bg-gray-50 text-gray-500 border border-gray-100">{sub}</span>
+      <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full bg-gray-50 text-gray-500 border border-gray-100">
+        {sub}
+      </span>
     </div>
     
-    <h3 className="text-xl font-bold mb-4" style={{ color: theme.colors.text, fontFamily: theme.fonts.heading }}>{title}</h3>
+    <h3 className="text-xl font-bold mb-4" style={{ color: theme.colors.text, fontFamily: theme.fonts.heading }}>
+      {title}
+    </h3>
     <p className="text-sm text-gray-600 mb-8 leading-relaxed flex-grow border-b border-gray-50 pb-8">
       {description}
     </p>
@@ -61,19 +81,27 @@ const LuxuryCard = ({ icon: Icon, title, sub, description, points }) => (
           <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center border" style={{ borderColor: `${theme.colors.secondary}40` }}>
             <CheckCircle2 size={12} color={theme.colors.secondary} className="opacity-0 group-hover/point:opacity-100 transition-opacity" />
           </div>
-          <span className="text-sm font-medium text-gray-700 group-hover/point:text-gray-900 transition-colors">{point}</span>
+          <span className="text-sm font-medium text-gray-700 group-hover/point:text-gray-900 transition-colors">
+            {point}
+          </span>
         </div>
       ))}
     </div>
   </div>
 );
 
+/**
+ * CertificationBadge Component
+ * Displays compliance standards (SDGs, GSTC, etc.)
+ */
 const CertificationBadge = ({ icon: Icon, title, items }) => (
   <div className="flex flex-col items-center text-center p-6 bg-white rounded-2xl border border-gray-50 shadow-sm hover:border-emerald-500/20 hover:shadow-md transition-all duration-300">
     <div className="mb-4 p-3 rounded-full bg-emerald-50 text-emerald-800">
       <Icon size={24} />
     </div>
-    <h4 className="font-bold text-gray-800 mb-4" style={{ fontFamily: theme.fonts.heading }}>{title}</h4>
+    <h4 className="font-bold text-gray-800 mb-4" style={{ fontFamily: theme.fonts.heading }}>
+      {title}
+    </h4>
     <div className="flex flex-wrap justify-center gap-2">
       {items.map((item, i) => (
         <span key={i} className="text-[10px] uppercase font-semibold px-3 py-1.5 bg-gray-50 border border-gray-100 text-gray-600 rounded-full tracking-wider">
@@ -84,6 +112,10 @@ const CertificationBadge = ({ icon: Icon, title, items }) => (
   </div>
 );
 
+/**
+ * FlowChartItem Component
+ * Helper for the "Business Value" flowchart section
+ */
 const FlowChartItem = ({ icon: Icon, title, description, color }) => (
   <div className="flex items-center gap-4 bg-white p-5 rounded-xl border border-gray-100 shadow-sm relative z-10">
     <div className="p-3 rounded-lg flex-shrink-0" style={{ backgroundColor: `${color}15` }}>
@@ -206,13 +238,13 @@ export default function ResortPitch() {
           </div>
         </section>
 
-        {/* --- VALUE CREATION FLOW (New "MBA" Infographic) --- */}
+        {/* --- VALUE CREATION FLOW (MBA Infographic) --- */}
         <section className="bg-gray-50 rounded-3xl p-12 border border-gray-200/50">
           <h2 className="text-2xl font-bold text-center mb-12" style={{ color: theme.colors.text, fontFamily: theme.fonts.heading }}>
             Turning Audit Insights into <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-800 to-emerald-600">Business Value</span>
           </h2>
           <div className="max-w-4xl mx-auto relative">
-            {/* Connecting Lines */}
+            {/* Connecting Lines (Desktop only) */}
             <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -translate-y-1/2 z-0 hidden md:block"></div>
             <div className="absolute top-12 left-1/4 w-px h-40 bg-gray-200 -translate-x-1/2 z-0 hidden md:block"></div>
             <div className="absolute top-12 right-1/4 w-px h-40 bg-gray-200 translate-x-1/2 z-0 hidden md:block"></div>
@@ -248,7 +280,7 @@ export default function ResortPitch() {
           </div>
         </section>
 
-        {/* --- GLOBALLY ALIGNED (The "Trust" Section) --- */}
+        {/* --- GLOBALLY ALIGNED (Trust Section) --- */}
         <section>
           <div className="text-center mb-16">
              <h2 className="text-2xl font-bold" style={{ fontFamily: theme.fonts.heading, color: theme.colors.text }}>Globally Aligned, Locally Rooted</h2>
@@ -274,7 +306,7 @@ export default function ResortPitch() {
           </div>
         </section>
 
-        {/* --- THE DELIVERABLE (The Premium Output) --- */}
+        {/* --- THE DELIVERABLE (Premium Output) --- */}
         <section className="relative rounded-[2.5rem] overflow-hidden text-white">
           <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-950"></div>
           {/* Sophisticated background pattern */}
