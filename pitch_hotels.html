@@ -8,12 +8,12 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- HTM + Preact -->
+  <!-- HTM + Preact UMD -->
   <script src="https://unpkg.com/htm@3.1.1/dist/htm.umd.js"></script>
   <script src="https://unpkg.com/preact@10.15.1/dist/preact.umd.js"></script>
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Lucide UMD (IMPORTANT: this one works in browser) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <style>
     body { font-family: ui-sans-serif, system-ui; background:#F9FAF8; }
@@ -25,7 +25,8 @@
 
   <div id="app"></div>
 
-  <script type="module">
+  <!-- DO NOT USE type="module" -->
+  <script>
     const { html } = htmPreact;
     const { h, render } = preact;
 
@@ -37,9 +38,6 @@
       muted:"#64748B"
     };
 
-    /* ---------------------------
-       SMALL HELPERS (Performance)
-    ---------------------------- */
     const Icon = (name, size=28, color=theme.primary) =>
       html`<i data-lucide="${name}" style="width:${size}px;height:${size}px;color:${color};"></i>`;
 
@@ -76,22 +74,16 @@
         <h4 class="font-bold heading mb-3 text-gray-800">${title}</h4>
         <div class="flex flex-wrap gap-2 justify-center">
           ${items.map(i => html`
-            <span class="text-[10px] font-semibold px-3 py-1.5 bg-gray-50 border text-gray-600 rounded-full uppercase">
-              ${i}
-            </span>
+            <span class="text-[10px] font-semibold px-3 py-1.5 bg-gray-50 border text-gray-600 rounded-full uppercase">${i}</span>
           `)}
         </div>
       </div>
     `;
 
-    /* ---------------------------
-       MAIN PAGE
-    ---------------------------- */
     const App = () => html`
       <div class="max-w-6xl mx-auto p-6 md:p-12 space-y-28">
 
-        <!-- HERO -->
-        <header class="text-center space-y-6 pt-10 relative">
+        <header class="text-center space-y-6 pt-10">
           <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border text-xs font-bold tracking-widest"
                style="color:${theme.primary}">
             ${Icon("building",14)}
@@ -108,7 +100,6 @@
           </p>
         </header>
 
-        <!-- EXEC SUMMARY -->
         <section class="bg-white rounded-3xl p-10 border shadow-xl grid md:grid-cols-12 gap-10 relative">
           <div class="md:col-span-5 space-y-6">
             <h2 class="text-3xl heading font-bold" style="color:${theme.text}">
@@ -118,7 +109,6 @@
               Guests and investors demand real evidence. We make sustainability operational.
             </p>
           </div>
-
           <div class="md:col-span-7 grid grid-cols-2 gap-6">
             <div class="p-6 bg-gray-50 rounded-2xl hover:bg-white shadow border transition">
               ${Icon("trending-up",32,theme.accent)}
@@ -133,7 +123,6 @@
           </div>
         </section>
 
-        <!-- THREE PILLARS -->
         <section>
           <div class="text-center mb-14">
             <h2 class="text-sm uppercase tracking-widest text-gray-500">We Study Your Full Footprint</h2>
@@ -148,12 +137,7 @@
               title:"Environmental",
               sub:"The Ecosystem",
               desc:"We map energy/water use, waste streams, and biodiversity impact.",
-              points:[
-                "Scope 1, 2 & 3 emissions",
-                "Efficiency cost pathways",
-                "Resource optimization",
-                "Biodiversity impact mapping"
-              ]
+              points:["Scope 1–3 emissions","Efficiency pathways","Resource optimization","Biodiversity mapping"]
             })}
 
             ${Card({
@@ -161,12 +145,7 @@
               title:"Social",
               sub:"The Community",
               desc:"We evaluate workforce, suppliers, and cultural interactions.",
-              points:[
-                "Local enterprise integration",
-                "Cultural heritage stewardship",
-                "Staff well-being metrics",
-                "Global social benchmarks"
-              ]
+              points:["Local enterprises","Cultural stewardship","Staff well-being","Social benchmarks"]
             })}
 
             ${Card({
@@ -174,17 +153,11 @@
               title:"Economic",
               sub:"The Business Case",
               desc:"Translating sustainability into ROI and risk reduction.",
-              points:[
-                "Efficiency savings",
-                "Risk mitigation",
-                "Brand leadership",
-                "Asset appreciation"
-              ]
+              points:["Efficiency savings","Risk mitigation","Brand leadership","Asset appreciation"]
             })}
           </div>
         </section>
 
-        <!-- BADGES -->
         <section>
           <div class="text-center mb-12">
             <h2 class="text-2xl heading font-bold" style="color:${theme.text}">
@@ -194,23 +167,22 @@
           <div class="grid md:grid-cols-3 gap-10">
             ${Badge({
               icon:"target",
-              title:"UN Sustainable Development Goals",
+              title:"UN SDGs",
               items:["Goal 8","Goal 12","Goal 13"]
             })}
             ${Badge({
               icon:"award",
-              title:"Industry Certification Readiness",
+              title:"Industry Certifications",
               items:["GSTC","Green Key","EarthCheck"]
             })}
             ${Badge({
               icon:"file-check",
-              title:"Corporate Reporting Standards",
+              title:"Reporting Standards",
               items:["ESRS","BRSR","Scopes 1–3"]
             })}
           </div>
         </section>
 
-        <!-- CTA -->
         <footer class="text-center space-y-6">
           <h2 class="text-3xl heading font-bold" style="color:${theme.text}">
             Ready to audit your impact?
@@ -225,7 +197,7 @@
 
     render(h(App), document.getElementById("app"));
 
-    // Activate Lucide icons after render
+    // Activate icons
     lucide.createIcons();
   </script>
 
