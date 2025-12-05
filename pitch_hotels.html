@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>TERP — Hotels & Resorts Pitch</title>
+  <title>TERP — Luxury Hospitality Audit Pitch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,193 +14,277 @@
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <style>
-    body { font-family: ui-sans-serif, system-ui; background:#F9FAF8; }
-    .heading { font-family: ui-serif, Georgia, serif; }
+    /* Custom font styles for a luxury feel */
+    body { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; background:#F8FAF9; }
+    .heading { font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; letter-spacing: -0.025em; }
+    .bg-luxury-gradient { background: linear-gradient(135deg, #133D26 0%, #1A4D2E 50%, #0F2F1E 100%); }
+    .text-gold { color: #C29D6D; }
+    .border-gold { border-color: #C29D6D; }
+    .bg-gold { background-color: #C29D6D; }
   </style>
 </head>
 
-<body class="text-gray-800">
+<body class="text-gray-800 antialiased">
 
   <div id="app"></div>
 
   <script>
-    // --- 1. SETUP: Bind htm to Preact ---
+    // --- 1. SETUP ---
     const { h, render } = preact;
-    const { useEffect } = preactHooks; // FIX: Hooks live here in UMD
+    const { useEffect } = preactHooks;
     const html = htm.bind(h);
 
     const theme = {
-      primary:"#1A4D2E",
-      secondary:"#4F8A5E",
-      accent:"#A87B50",
-      text:"#1F2937",
-      muted:"#64748B"
+      primary: "#1A4D2E", // Deep Emerald
+      secondary: "#2D6A4F",
+      gold: "#C29D6D",    // Luxury accent color
+      textDark: "#111827",
+      textGray: "#4B5563",
+      bgLight: "#F3F4F6"
     };
 
-    // --- 2. COMPONENTS ---
+    // --- 2. HELPER COMPONENTS ---
 
-    // Icon helper that creates an <i> tag for Lucide to target
-    const Icon = (name, size=28, color=theme.primary) =>
-      html`<i data-lucide="${name}" style="width:${size}px;height:${size}px;color:${color};"></i>`;
+    const Icon = (name, size=24, color="currentColor", className="") =>
+      html`<i data-lucide="${name}" class="${className}" style="width:${size}px;height:${size}px;color:${color};"></i>`;
 
-    const Bullet = (text) => html`
-      <div class="flex gap-3">
-        <div class="w-5 h-5 flex items-center justify-center rounded-full border border-emerald-400/40">
-          ${Icon("check-circle",12,"#4F8A5E")}
+    // Section Header Component
+    const SectionHeader = ({ title, subtitle, center=true }) => html`
+        <div class="${center ? 'text-center' : 'text-left'} mb-12">
+            <h4 class="text-gold font-bold tracking-widest uppercase text-xs mb-3">${subtitle}</h4>
+            <h2 class="text-3xl md:text-4xl heading font-bold text-gray-900">${title}</h2>
         </div>
-        <span class="text-sm text-gray-700">${text}</span>
-      </div>
     `;
 
-    const Card = ({icon,title,sub,desc,points}) => html`
-      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition">
-        <div class="flex justify-between mb-6">
-          <div class="p-3 rounded-xl bg-opacity-10" style="background:${theme.primary}15">
-            ${Icon(icon,28,theme.primary)}
-          </div>
-          <span class="text-[10px] uppercase font-bold px-3 py-1 bg-gray-50 border text-gray-500 rounded-full">${sub}</span>
+    // A high-impact statistic card
+    const StatCard = ({ number, label, icon }) => html`
+      <div class="p-6 bg-white rounded-2xl shadow-sm border-b-4 border-gold flex items-center gap-4">
+        <div class="p-3 bg-emerald-50 rounded-full text-emerald-800">
+            ${Icon(icon, 28)}
         </div>
-        <h3 class="text-xl font-bold heading mb-3" style="color:${theme.text}">${title}</h3>
-        <p class="text-sm text-gray-600 leading-relaxed mb-6 border-b pb-6">${desc}</p>
-        <div class="space-y-3">
-          ${points.map(p => Bullet(p))}
+        <div>
+            <div class="text-3xl font-extrabold heading text-gray-900">${number}</div>
+            <div class="text-sm text-gray-600 font-medium">${label}</div>
         </div>
       </div>
     `;
 
-    const Badge = ({icon,title,items}) => html`
-      <div class="flex flex-col items-center text-center p-6 bg-white rounded-2xl border shadow-sm">
-        <div class="mb-4 p-3 rounded-full bg-emerald-50 text-emerald-800">
-          ${Icon(icon,24,"#065f46")}
+    // A step in the audit process visual
+    const ProcessStep = ({ number, title, desc, icon, isLast }) => html`
+      <div class="relative flex gap-6 group">
+        ${!isLast && html`<div class="absolute left-8 top-16 bottom-0 w-0.5 bg-gray-200 group-hover:bg-emerald-200 transition-colors"></div>`}
+        <div class="relative z-10 flex-shrink-0 w-16 h-16 rounded-full bg-white border-2 border-emerald-100 group-hover:border-gold flex items-center justify-center shadow-sm transition-all">
+            ${Icon(icon, 32, theme.primary)}
+            <div class="absolute -top-2 -right-2 w-6 h-6 bg-gold rounded-full text-white text-xs font-bold flex items-center justify-center">${number}</div>
         </div>
-        <h4 class="font-bold heading mb-3 text-gray-800">${title}</h4>
-        <div class="flex flex-wrap gap-2 justify-center">
-          ${items.map(i => html`
-            <span class="text-[10px] font-semibold px-3 py-1.5 bg-gray-50 border text-gray-600 rounded-full uppercase">${i}</span>
-          `)}
+        <div class="pb-12">
+            <h3 class="text-xl heading font-bold mb-2 text-gray-900 group-hover:text-emerald-800 transition-colors">${title}</h3>
+            <p class="text-gray-600 leading-relaxed max-w-md">${desc}</p>
         </div>
       </div>
     `;
 
-    // --- 3. MAIN APP ---
+
+    // --- 3. MAIN APPLICATION ---
     const App = () => {
-      // This hook ensures icons are drawn every time the UI updates
       useEffect(() => {
         lucide.createIcons();
       });
 
       return html`
-      <div class="max-w-6xl mx-auto p-6 md:p-12 space-y-28">
+      <div class="min-h-screen">
 
-        <header class="text-center space-y-6 pt-10">
-          <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border text-xs font-bold tracking-widest"
-               style="color:${theme.primary}">
-            ${Icon("building",14)}
-            Premium Hospitality Solutions
-          </div>
-          <h1 class="text-6xl font-extrabold heading leading-tight" style="color:${theme.primary}">
-            Sustainability is a <br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-900 via-emerald-700 to-emerald-900">
-              Strategic Advantage.
-            </span>
-          </h1>
-          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Not a compliance task — a foundation for asset resilience and guest trust.
-          </p>
-        </header>
-
-        <section class="bg-white rounded-3xl p-10 border shadow-xl grid md:grid-cols-12 gap-10 relative">
-          <div class="md:col-span-5 space-y-6">
-            <h2 class="text-3xl heading font-bold" style="color:${theme.text}">
-              Move Beyond Broad Commitments.
-            </h2>
-            <p class="text-lg text-gray-600 leading-relaxed">
-              Guests and investors demand real evidence. We make sustainability operational.
-            </p>
-          </div>
-          <div class="md:col-span-7 grid grid-cols-2 gap-6">
-            <div class="p-6 bg-gray-50 rounded-2xl hover:bg-white shadow border transition">
-              ${Icon("trending-up",32,theme.accent)}
-              <p class="font-bold heading mt-4">Asset Resilience</p>
-              <p class="text-sm text-gray-500">Future-proofing operations and value.</p>
+        <div class="relative overflow-hidden bg-luxury-gradient text-white pt-20 pb-32 px-6">
+            <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <div class="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-gold text-sm font-bold tracking-widest uppercase">
+                    ${Icon("diamond", 16, theme.gold)}
+                    For Prestige Profiles
+                </div>
+                <h1 class="text-5xl md:text-7xl heading font-extrabold leading-tight mb-8">
+                    The New Standard of Luxury <br/> is <span class="text-gold">Regenerative.</span>
+                </h1>
+                <p class="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed mb-10">
+                    For iconic brands, sustainability is no longer about compliance. It is the ultimate indicator of quality, longevity, and operational intelligence.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button class="px-8 py-4 rounded-full bg-gold text-emerald-950 font-bold text-lg hover:bg-white transition shadow-lg hover:shadow-gold/20 flex items-center gap-2">
+                        Schedule Executive Briefing
+                        ${Icon("arrow-right", 20)}
+                    </button>
+                    <p class="text-sm text-gray-300">Move beyond the baseline.</p>
+                </div>
             </div>
-            <div class="p-6 bg-gray-50 rounded-2xl hover:bg-white shadow border transition">
-              ${Icon("shield-check",32,theme.accent)}
-              <p class="font-bold heading mt-4">Verified Trust</p>
-              <p class="text-sm text-gray-500">Evidence-based reporting.</p>
+        </div>
+
+        <section class="py-20 px-6 -mt-16 relative z-20">
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-gray-100">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl heading font-bold mb-6 text-gray-900">The Era of "Vague Promises" is Over.</h2>
+                            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                                Today's discerning guest and astute investor demand verifiable proof. Generalized statements about "caring for the planet" now carry significant risk.
+                            </p>
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex gap-3 items-start">
+                                    <div class="mt-1 bg-red-50 p-1 rounded-full">${Icon("alert-triangle", 18, "#dc2626")}</div>
+                                    <span class="text-gray-700 font-medium">Greenwashing accusations damage generational brand equity instantly.</span>
+                                </li>
+                                <li class="flex gap-3 items-start">
+                                    <div class="mt-1 bg-red-50 p-1 rounded-full">${Icon("file-warning", 18, "#dc2626")}</div>
+                                    <span class="text-gray-700 font-medium">Regulatory reporting (CSRD, SEC) is becoming mandatory and complex.</span>
+                                </li>
+                                <li class="flex gap-3 items-start">
+                                    <div class="mt-1 bg-red-50 p-1 rounded-full">${Icon("trending-down", 18, "#dc2626")}</div>
+                                    <span class="text-gray-700 font-medium">Inefficient resource use is hemorrhaging OpEx in an inflationary market.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-2xl border-2 border-dashed border-gray-200 relative">
+                            <div class="absolute -top-4 -left-4 bg-gold text-white px-4 py-1 font-bold text-sm rounded-full uppercase tracking-widest">The TERP Reality Check</div>
+                            <p class="heading text-2xl font-bold text-emerald-900 mb-4">We turn existential risk into verifiable asset value.</p>
+                            <p class="text-gray-600">A TERP audit doesn't just count carbon. It stress-tests your operations against future climate risks and market demands, providing a data-backed roadmap to leadership.</p>
+                            <div class="mt-6 flex gap-4">
+                                ${Icon("shield-check", 32, theme.primary)}
+                                ${Icon("bar-chart-4", 32, theme.primary)}
+                                ${Icon("leaf", 32, theme.primary)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </section>
 
-        <section>
-          <div class="text-center mb-14">
-            <h2 class="text-sm uppercase tracking-widest text-gray-500">We Study Your Full Footprint</h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-              Environmental, social, and economic performance — integrated.
-            </p>
-          </div>
 
-          <div class="grid md:grid-cols-3 gap-10">
-            ${Card({
-              icon:"leaf",
-              title:"Environmental",
-              sub:"The Ecosystem",
-              desc:"We map energy/water use, waste streams, and biodiversity impact.",
-              points:["Scope 1–3 emissions","Efficiency pathways","Resource optimization","Biodiversity mapping"]
-            })}
+        <section class="py-24 px-6 bg-gray-50">
+            <div class="max-w-5xl mx-auto">
+                ${SectionHeader({
+                    subtitle: "Our Methodology",
+                    title: "The 360° Audit Roadmap: From Data to Dominance"
+                })}
 
-            ${Card({
-              icon:"users",
-              title:"Social",
-              sub:"The Community",
-              desc:"We evaluate workforce, suppliers, and cultural interactions.",
-              points:["Local enterprises","Cultural stewardship","Staff well-being","Social benchmarks"]
-            })}
+                <div class="grid md:grid-cols-5 gap-8 items-start">
+                    <div class="md:col-span-2 bg-white p-8 rounded-2xl shadow-sm border top-8 sticky">
+                        <h3 class="heading text-2xl font-bold mb-4 text-emerald-900">A Forensic Approach to Hospitality</h3>
+                        <p class="text-gray-600 mb-6">We don't rely on checklists. We deploy a rigorous, multi-disciplinary analysis of your property's entire ecosystem.</p>
+                        <p class="text-gray-600 font-medium">The outcome is clarity. You will know exactly where you stand and precisely how to lead.</p>
+                        <div class="mt-8 p-4 bg-emerald-50 rounded-xl border border-emerald-100 flex items-center gap-3">
+                            ${Icon("clock", 24, theme.primary)}
+                            <span class="text-sm text-emerald-800 font-bold">Typical engagement timeline: 6–12 Weeks</span>
+                        </div>
+                    </div>
 
-            ${Card({
-              icon:"briefcase",
-              title:"Economic",
-              sub:"The Business Case",
-              desc:"Translating sustainability into ROI and risk reduction.",
-              points:["Efficiency savings","Risk mitigation","Brand leadership","Asset appreciation"]
-            })}
-          </div>
+                    <div class="md:col-span-3 pl-4 md:pl-12 pt-4">
+                        ${ProcessStep({
+                            number: 1,
+                            icon: "database",
+                            title: "Deep-Dive Data Collection",
+                            desc: "We map every input and output. Utility data, supply chain invoices, waste streams, food sourcing, and staff commuting patterns."
+                        })}
+                        ${ProcessStep({
+                            number: 2,
+                            icon: "microscope",
+                            title: "On-Site Operational Forensics",
+                            desc: "Our experts walk the back-of-house. We inspect HVAC efficiency, kitchen workflows, water systems, and biodiversity impacts on grounds."
+                        })}
+                        ${ProcessStep({
+                            number: 3,
+                            icon: "calculator",
+                            title: "Impact & Financial Modeling",
+                            desc: "We convert ecological data into financial reality. Calculating the true ROI of interventions vs. the rising cost of inaction (CoI)."
+                        })}
+                        ${ProcessStep({
+                            number: 4,
+                            icon: "map",
+                            title: "Strategic Roadmap & Verification",
+                            desc: "Delivery of a board-ready execution plan aligned with global standards (GSTC, SDGs), ready for third-party certification.",
+                            isLast: true
+                        })}
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section>
-          <div class="text-center mb-12">
-            <h2 class="text-2xl heading font-bold" style="color:${theme.text}">
-              Globally Aligned, Locally Rooted
-            </h2>
-          </div>
-          <div class="grid md:grid-cols-3 gap-10">
-            ${Badge({
-              icon:"target",
-              title:"UN SDGs",
-              items:["Goal 8","Goal 12","Goal 13"]
-            })}
-            ${Badge({
-              icon:"award",
-              title:"Industry Certifications",
-              items:["GSTC","Green Key","EarthCheck"]
-            })}
-            ${Badge({
-              icon:"file-check",
-              title:"Reporting Standards",
-              items:["ESRS","BRSR","Scopes 1–3"]
-            })}
-          </div>
+
+        <section class="py-24 px-6 bg-white">
+            <div class="max-w-6xl mx-auto">
+                ${SectionHeader({
+                    subtitle: "The Tangible Outcomes",
+                    title: "Why Leading Properties Partner With Us"
+                })}
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition duration-300 border border-gray-100 group">
+                        <div class="mb-6 p-4 bg-white rounded-xl inline-block shadow-sm group-hover:scale-110 transition">
+                            ${Icon("coins", 36, theme.gold)}
+                        </div>
+                        <h3 class="heading text-2xl font-bold mb-4 text-gray-900">Optimize OpEx & Asset Value</h3>
+                        <p class="text-gray-600 leading-relaxed">Sustainability is efficiency. We identify significant savings in energy, water, and waste management that directly improve Net Operating Income (NOI) and increase property valuation.</p>
+                    </div>
+                     <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition duration-300 border border-gray-100 group">
+                        <div class="mb-6 p-4 bg-white rounded-xl inline-block shadow-sm group-hover:scale-110 transition">
+                            ${Icon("award", 36, theme.gold)}
+                        </div>
+                        <h3 class="heading text-2xl font-bold mb-4 text-gray-900">Elevate Brand & Guest Loyalty</h3>
+                        <p class="text-gray-600 leading-relaxed">The luxury traveler is increasingly values-driven. We help you craft authentic, verified narratives that resonate deeply, justifying premium pricing and securing loyalty.</p>
+                    </div>
+                     <div class="bg-gray-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition duration-300 border border-gray-100 group">
+                        <div class="mb-6 p-4 bg-white rounded-xl inline-block shadow-sm group-hover:scale-110 transition">
+                            ${Icon("lock", 36, theme.gold)}
+                        </div>
+                        <h3 class="heading text-2xl font-bold mb-4 text-gray-900">Future-Proof Compliance</h3>
+                        <p class="text-gray-600 leading-relaxed">Stay ahead of rapidly evolving global regulations and reporting mandates. Our audit prepares your data infrastructure for seamless ESG reporting to investors and regulators.</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mt-16">
+                    ${StatCard({ number: "15-30%", label: "Typical Energy Savings Identified", icon: "zap" })}
+                    ${StatCard({ number: "100%", label: "Audit Data Verifiability", icon: "check-circle-2" })}
+                    ${StatCard({ number: "Premium", label: "Guest Segment Attraction", icon: "users" })}
+                </div>
+            </div>
         </section>
 
-        <footer class="text-center space-y-6">
-          <h2 class="text-3xl heading font-bold" style="color:${theme.text}">
-            Ready to audit your impact?
-          </h2>
-          <button class="group px-10 py-5 rounded-full bg-gradient-to-r from-emerald-900 to-emerald-700 text-white text-lg font-bold shadow-xl hover:shadow-2xl transition">
-            Request a Sample Report
-            <i data-lucide="arrow-right" class="inline ml-2"></i>
-          </button>
+
+        <section class="py-16 px-6 bg-gray-900 text-center">
+            <div class="max-w-4xl mx-auto">
+                 <h4 class="text-gold font-bold tracking-widest uppercase text-xs mb-6">Aligned with Global Best Practices</h4>
+                 <div class="flex flex-wrap justify-center gap-x-12 gap-y-6 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                    <span class="text-white font-bold text-xl flex items-center gap-2">${Icon("globe", 20)} UN SDGs</span>
+                    <span class="text-white font-bold text-xl flex items-center gap-2">${Icon("check-square", 20)} GSTC Criteria</span>
+                    <span class="text-white font-bold text-xl flex items-center gap-2">${Icon("file-bar-chart", 20)} GRI Standards</span>
+                    <span class="text-white font-bold text-xl flex items-center gap-2">${Icon("building-2", 20)} Green Key</span>
+                </div>
+            </div>
+        </section>
+
+
+        <footer class="relative py-24 px-6 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]"></div>
+
+            <div class="max-w-4xl mx-auto text-center relative z-10 space-y-8">
+                <div class="inline-block p-4 bg-emerald-50 rounded-full text-emerald-800 mb-4">
+                    ${Icon("radar", 40)}
+                </div>
+                <h2 class="text-4xl md:text-5xl heading font-bold text-gray-900 leading-tight">
+                    Your property is an asset.<br/>Is it a resilient one?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Don't wait for regulations or public opinion to force your hand. Lead the market with a TERP sustainability audit.
+                </p>
+                <div class="pt-8">
+                    <button class="group relative overflow-hidden px-12 py-5 rounded-full bg-luxury-gradient text-white text-lg font-bold shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                        <span class="relative z-10 flex items-center gap-3">
+                            Request a Confidential Consultation
+                            ${Icon("arrow-right", 24, "currentColor", "group-hover:translate-x-1 transition-transform")}
+                        </span>
+                    </button>
+                </div>
+                <p class="text-gray-500 text-sm pt-4">Recommended for portfolios and individual prestige properties.</p>
+            </div>
         </footer>
+
       </div>
     `;
     };
