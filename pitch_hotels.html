@@ -1,77 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
   <title>TERP — Hotels & Resorts Pitch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="logo_favicon2.png">
-
-  <!-- Tailwind CDN -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Lucide Icons CDN -->
+  <!-- HTM + Preact -->
+  <script src="https://unpkg.com/htm@3.1.1/dist/htm.umd.js"></script>
+  <script src="https://unpkg.com/preact@10.15.1/dist/preact.umd.js"></script>
+
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-
   <style>
-    body { 
-      font-family: Inter, sans-serif;
-      background-color: #F9FAF8;
-    }
-    .heading-font {
-      font-family: Merriweather, serif;
-    }
+    body { font-family: ui-sans-serif, system-ui; background:#F9FAF8; }
+    .heading { font-family: ui-serif, Georgia, serif; }
   </style>
 </head>
 
 <body class="text-gray-800">
 
-  <!-- MAIN WRAPPER -->
-  <main class="p-6 md:p-16 max-w-7xl mx-auto space-y-32">
+  <div id="app"></div>
 
-    <!-- HERO -->
-    <section class="text-center max-w-5xl mx-auto space-y-10 pt-12 relative">
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 opacity-5 pointer-events-none">
-        <i data-lucide="globe" class="w-[600px] h-[600px]"></i>
-      </div>
+  <script type="module">
+    const { html } = htmPreact;
+    const { h, render } = preact;
 
-      <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em] bg-white border border-gray-100 shadow-sm relative z-10 text-[#1A4D2E]">
-        <i data-lucide="building" class="w-4 h-4"></i>
-        Premium Hospitality Solutions
-      </div>
-      
-      <h1 class="heading-font text-6xl md:text-7xl font-extrabold tracking-tight leading-tight relative z-10 text-[#1A4D2E]">
-        Sustainability is a <br/>
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-900 via-emerald-700 to-emerald-900">
-          Strategic Advantage.
-        </span>
-      </h1>
+    const theme = {
+      primary:"#1A4D2E",
+      secondary:"#4F8A5E",
+      accent:"#A87B50",
+      text:"#1F2937",
+      muted:"#64748B"
+    };
 
-      <p class="text-xl md:text-2xl font-light leading-relaxed text-gray-600 max-w-3xl mx-auto relative z-10">
-        For the modern luxury brand, this is not a compliance checklist. 
-        It is the foundation of asset resilience, market relevance, and enduring guest trust.
-      </p>
-    </section>
+    /* ---------------------------
+       SMALL HELPERS (Performance)
+    ---------------------------- */
+    const Icon = (name, size=28, color=theme.primary) =>
+      html`<i data-lucide="${name}" style="width:${size}px;height:${size}px;color:${color};"></i>`;
 
-    <!-- SUMMARY SECTION -->
-    <section class="bg-white rounded-3xl p-10 md:p-16 border border-gray-100 shadow-xl grid md:grid-cols-12 gap-12 relative">
-      <div class="md:col-span-5 relative z-10">
-        <h2 class="heading-font text-3xl font-bold text-[#1F2937]">Move Beyond Broad Commitments.</h2>
-        <p class="mt-6 text-lg text-gray-600 leading-relaxed">
-          Guests, investors, and regulators are asking harder questions. 
-          We provide the data-driven answers by integrating sustainability into your operational core.
-        </p>
-      </div>
-
-      <div class="md:col-span-7 grid grid-cols-2 gap-6">
-        <div class="p-6 bg-gray-50 rounded-2xl border hover:bg-white hover:shadow-md transition-all">
-          <i data-lucide="trending-up" class="w-8 h-8 mb-4 text-[#A87B50]"></i>
-          <p class="font-bold text-lg heading-font">Asset Resilience</p>
-          <p class="text-sm text-gray-500">Future-proofing property value.</p>
+    const Bullet = (text) => html`
+      <div class="flex gap-3">
+        <div class="w-5 h-5 flex items-center justify-center rounded-full border border-emerald-400/40">
+          ${Icon("check-circle",12,"#4F8A5E")}
         </div>
+        <span class="text-sm text-gray-700">${text}</span>
+      </div>
+    `;
 
-        <div class="p-6 bg-gray-50 rounded-2
+    const Card = ({icon,title,sub,desc,points}) => html`
+      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition">
+        <div class="flex justify-between mb-6">
+          <div class="p-3 rounded-xl bg-opacity-10" style="background:${theme.primary}15">
+            ${Icon(icon,28,theme.primary)}
+          </div>
+          <span class="text-[10px] uppercase font-bold px-3 py-1 bg-gray-50 border text-gray-500 rounded-full">${sub}</span>
+        </div>
+        <h3 class="text-xl font-bold heading mb-3" style="color:${theme.text}">${title}</h3>
+        <p class="text-sm text-gray-600 leading-relaxed mb-6 border-b pb-6">${desc}</p>
+        <div class="space-y-3">
+          ${points.map(p => Bullet(p))}
+        </div>
+      </div>
+    `;
+
+    const Badge = ({icon,title,items}) => html`
+      <div class="flex flex-col items-center text-center p-6 bg-white rounded-2xl border shadow-sm">
+        <div class="mb-4 p-3 rounded-full bg-emerald-50 text-emerald-800">
+          ${Icon(icon,24,"#065f46")}
+        </div>
+        <h4 class="font-bold heading mb-3 text-gray-800">${title}</h4>
+        <div class="flex flex-wrap gap-2 justify-center">
+          ${items.map(i => html`
+            <span class="text-[10px] font-semibold px-3 py-1.5 bg-gray-50 border text-gray-600 rounded-full uppercase">
+              ${i}
+            </span>
+          `)}
+        </div>
+      </div>
+    `;
+
+    /* ---------------------------
+       MAIN PAGE
+    ---------------------------- */
+    const App = () => html`
+      <div class="max-w-6xl mx-auto p-6 md:p-12 space-y-28">
+
+        <!-- HERO -->
+        <header class="text-center space-y-6 pt-10 relative">
+          <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border text-xs font-bold tracking-widest"
+               style="color:${theme.primary}">
+            ${Icon("building",14)}
+            Premium Hospitality Solutions
+          </div>
+          <h1 class="text-6xl font-extrabold heading leading-tight" style="color:${theme.primary}">
+            Sustainability is a <br/>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-900 via-emerald-700 to-emerald-900">
+              Strategic Advantage.
+            </span>
+          </h1>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Not a compliance task — a foundation for asset resilience and guest trust.
+          </p>
+        </header>
+
+        <!-- EXEC SUMMARY -->
+        <section class="bg-white rounded-3xl p-10 border shadow-xl grid md:grid-cols-12 gap-10 relative">
+          <div class="md:col-span-5 space-y-6">
+            <h2 class="text-3xl heading font-bold" style="color:${theme.text}">
+              Move Beyond Broad Commitments.
+            </h2>
+            <p class="text-lg text-gray-600 leading-relaxed">
+              Guests and investors demand real evidence. We make sustainability operational.
+            </p>
+          </div>
+
+          <div class="md:col-span-7 grid grid-cols-2 gap-6">
+            <div class="p-6 bg-gray-50 rounded-2xl hover:bg-white shadow border transition">
+              ${Icon("trending-up",32,theme.accent)}
+              <p class="font-bold heading mt-4">Asset Resilience</p>
+              <p class="text-sm text-gray-500">Future-proofing operations and value.</p>
+            </div>
+            <div class="p-6 bg-gray-50 rounded-2xl hover:bg-white shadow border transition">
+              ${Icon("shield-check",32,theme.accent)}
+              <p class="font-bold heading mt-4">Verified Trust</p>
+              <p class="text-sm text-gray-500">Evidence-based reporting.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- THREE PILLARS -->
+        <section>
+          <div class="text-center mb-14">
+            <h2 class="text-sm uppercase tracking-widest text-gray-500">We Study Your Full Footprint</h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+              Environmental, social, and economic performance — integrated.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-10">
+            ${Card({
+              icon:"leaf",
+              title:"Environmental",
+              sub:"The Ecosystem",
+              desc:"We map energy/water use, waste streams, and biodiversity impact.",
+              points:[
+                "Scope 1, 2 & 3 emissions",
+                "Efficiency cost pathways",
+                "Resource optimization",
+                "Biodiversity impact mapping"
+              ]
+            })}
+
+            ${Card({
+              icon:"users",
+              title:"Social",
+              sub:"The Community",
+              desc:"We evaluate workforce, suppliers, and cultural interactions.",
+              points:[
+                "Local enterprise integration",
+                "Cultural heritage stewardship",
+                "Staff well-being metrics",
+                "Global social benchmarks"
+              ]
+            })}
+
+            ${Card({
+              icon:"briefcase",
+              title:"Economic",
+              sub:"The Business Case",
+              desc:"Translating sustainability into ROI and risk reduction.",
+              points:[
+                "Efficiency savings",
+                "Risk mitigation",
+                "Brand leadership",
+                "Asset appreciation"
+              ]
+            })}
+          </div>
+        </section>
+
+        <!-- BADGES -->
+        <section>
+          <div class="text-center mb-12">
+            <h2 class="text-2xl heading font-bold" style="color:${theme.text}">
+              Globally Aligned, Locally Rooted
+            </h2>
+          </div>
+          <div class="grid md:grid-cols-3 gap-10">
+            ${Badge({
+              icon:"target",
+              title:"UN Sustainable Development Goals",
+              items:["Goal 8","Goal 12","Goal 13"]
+            })}
+            ${Badge({
+              icon:"award",
+              title:"Industry Certification Readiness",
+              items:["GSTC","Green Key","EarthCheck"]
+            })}
+            ${Badge({
+              icon:"file-check",
+              title:"Corporate Reporting Standards",
+              items:["ESRS","BRSR","Scopes 1–3"]
+            })}
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <footer class="text-center space-y-6">
+          <h2 class="text-3xl heading font-bold" style="color:${theme.text}">
+            Ready to audit your impact?
+          </h2>
+          <button class="group px-10 py-5 rounded-full bg-gradient-to-r from-emerald-900 to-emerald-700 text-white text-lg font-bold shadow-xl hover:shadow-2xl transition">
+            Request a Sample Report
+            <i data-lucide="arrow-right" class="inline ml-2"></i>
+          </button>
+        </footer>
+      </div>
+    `;
+
+    render(h(App), document.getElementById("app"));
+
+    // Activate Lucide icons after render
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>
