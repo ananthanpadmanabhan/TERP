@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TERP — Festival Sustainability Assessment</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Preact Engine -->
+  <script src="https://unpkg.com/htm@3.1.1/dist/htm.umd.js"></script>
+  <script src="https://unpkg.com/preact@10.15.1/dist/preact.umd.js"></script>
+  <script src="https://unpkg.com/preact@10.15.1/hooks/dist/hooks.umd.js"></script>
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Fonts: Merriweather (Literary) + Inter (Clean Data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- VIBRANT CULTURE THEME --- */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #FFFFFF;
+      color: #1E293B; /* Slate 800 */
+    }
+    
+    .serif {
+      font-family: 'Merriweather', serif;
+    }
+
+    /* Primary: Deep Cultural Teal (Intellectual + Eco) */
+    .bg-culture-dark {
+      background: linear-gradient(135deg, #0F766E 0%, #115E59 100%); /* Teal 700 to 800 */
+    }
+    
+    /* Accent: Festival Marigold (Energy) */
+    .text-vibrant { color: #F97316; } /* Orange 500 */
+    .bg-vibrant { background-color: #F97316; }
+    .border-vibrant { border-color: #F97316; }
+
+    /* Secondary Accent: Creative Coral */
+    .text-creative { color: #E11D48; } /* Rose 600 */
+
+    /* Soft Backgrounds */
+    .bg-warm-50 { background-color: #FFFBEB; } /* Amber 50 */
+    
+    .hover-lift {
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .hover-lift:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <div id="app"></div>
+
+  <script>
+    (function() {
+      var h = preact.h;
+      var render = preact.render;
+      var useEffect = preactHooks.useEffect;
+      var html = htm.bind(h);
+
+      // --- CONTENT CONFIG ---
+      var CONTENT = {
+        hero: {
+          tag: "Event Impact Intelligence",
+          title: "Curating Conscious Culture.",
+          tagline: "Where intellectual depth meets ecological action.",
+          sub: "Great festivals ignite minds without burning out the planet. We provide the forensic data and operational framework to ensure your event's legacy is one of vibrant stewardship.",
+          cta: "Audit Your Impact"
+        },
+        risks: [
+          { icon: "leaf", text: "Aligning with State Green Protocols." },
+          { icon: "users", text: "Meeting the Ethical Expectations of a Modern Audience." },
+          { icon: "trash-2", text: "Preventing Post-Event Ecological Degradation." }
+        ],
+        pillars: [
+          {
+            icon: "sprout",
+            title: "Environmental Integrity",
+            subtitle: "The Footprint",
+            desc: "We rigorously audit material flows. From stage decor sourcing to the final destination of food waste, ensuring true circularity over mere optics."
+          },
+          {
+            icon: "heart-handshake",
+            title: "Social Responsibility",
+            subtitle: "The People",
+            desc: "A festival is a community. We assess accessibility, fair labor conditions for ground staff, and the genuine inclusion of local artisans."
+          },
+          {
+            icon: "scale",
+            title: "Operational Ethics",
+            subtitle: "The Governance",
+            desc: "Transparency is key. We analyze vendor contracts and procurement policies to ensure every rupee spent supports ethical supply chains."
+          }
+        ],
+        steps: [
+          { icon: "clipboard-check", title: "Pre-Event Screening", desc: "Analyzing vendor contracts and waste management plans before the venue opens." },
+          { icon: "scan-eye", title: "Live Site Audit", desc: "Real-time monitoring of waste segregation, energy consumption, and crowd impact during the event days." },
+          { icon: "file-bar-chart-2", title: "Impact Quantification", desc: "Calculating carbon footprint, waste diversion rates, and plastic reduction metrics." },
+          { icon: "book-open-check", title: "The Legacy Report", desc: "A transparent, data-backed sustainability report for stakeholders and the public." }
+        ],
+        benefits: [
+          { icon: "badge-check", title: "Verified Accountability", desc: "Move beyond greenwashing. Present hard data that proves your commitment to the environment." },
+          { icon: "landmark", title: "Policy Alignment", desc: "Ensure your event serves as a model for State and National sustainability goals (SDGs)." },
+          { icon: "feather", title: "Intellectual Consistency", desc: "Align your operational reality with the progressive themes discussed on your stages." }
+        ],
+        stats: [
+          { number: "Zero", label: "Waste-to-Landfill Target", icon: "recycle" },
+          { number: "100%", label: "Traceable Impact Data", icon: "search" },
+          { number: "2 Weeks", label: "Total Turnaround", icon: "clock" }
+        ],
+        certifications: [
+          { icon: "globe", label: "UN SDGs" },
+          { icon: "leaf", label: "Green Protocol" },
+          { icon: "file-text", label: "GRI Standards" },
+          { icon: "check-circle", label: "ISO 20121" }
+        ]
+      };
+
+      // --- COMPONENTS ---
+
+      var Icon = function(name, size, color) {
+        if (!size) size = 24;
+        return html`<i data-lucide="${name}" style="width:${size}px;height:${size}px;color:${color || 'currentColor'}"></i>`;
+      };
+
+      var SectionHeader = function(props) {
+        return html`
+          <div class="${props.center ? 'text-center' : 'text-left'} mb-16">
+            <h4 class="text-vibrant font-bold tracking-widest uppercase text-xs mb-3 font-sans flex items-center gap-2 justify-${props.center ? 'center' : 'start'}">
+              ${props.center && Icon("sparkles", 14, "#F97316")}
+              ${props.subtitle}
+              ${!props.center && Icon("sparkles", 14, "#F97316")}
+            </h4>
+            <h2 class="text-4xl md:text-5xl serif font-bold text-slate-900 leading-tight">${props.title}</h2>
+            <div class="h-1 w-20 bg-gradient-to-r from-orange-500 to-rose-500 ${props.center ? 'mx-auto' : ''} mt-6 rounded-full"></div>
+          </div>
+        `;
+      };
+
+      var PillarCard = function(props) {
+        return html`
+          <div class="bg-white p-10 rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover-lift transition-all duration-300 group relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-600 to-emerald-600"></div>
+            <div class="flex justify-between items-start mb-6">
+               <div class="text-teal-700 p-3 bg-teal-50 rounded-full group-hover:bg-teal-600 group-hover:text-white transition-colors">
+                   ${Icon(props.item.icon, 32)}
+               </div>
+               <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400 group-hover:text-vibrant transition-colors">${props.item.subtitle}</span>
+            </div>
+            <h3 class="text-xl serif font-bold text-slate-800 mb-4">${props.item.title}</h3>
+            <p class="text-slate-600 leading-relaxed text-sm font-light">${props.item.desc}</p>
+          </div>
+        `;
+      };
+
+      var ProcessStep = function(props) {
+        return html`
+          <div class="relative flex gap-8 group">
+            ${!props.isLast && html`<div class="absolute left-6 top-16 bottom-0 w-0.5 bg-slate-100 group-hover:bg-orange-200 transition-colors"></div>`}
+            <div class="relative z-10 flex-shrink-0 w-12 h-12 rounded-full bg-white border-2 border-slate-200 group-hover:border-orange-500 flex items-center justify-center transition-all shadow-sm group-hover:shadow-md">
+              <span class="font-sans font-bold text-slate-400 group-hover:text-orange-600 text-sm">${props.number}</span>
+            </div>
+            <div class="pb-12 pt-1">
+              <h3 class="text-lg serif font-bold mb-2 text-slate-900 group-hover:text-teal-800 transition-colors">${props.step.title}</h3>
+              <p class="text-slate-600 font-light leading-relaxed max-w-md text-sm">${props.step.desc}</p>
+            </div>
+          </div>
+        `;
+      };
+
+      var BenefitCard = function(props) {
+        return html`
+          <div class="text-center p-6 hover-lift bg-white rounded-xl border border-transparent hover:border-slate-100 hover:shadow-lg transition-all">
+            <div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-orange-100 to-rose-100 text-rose-600">
+              ${Icon(props.item.icon, 32)}
+            </div>
+            <h3 class="serif text-lg font-bold mb-3 text-slate-900">${props.item.title}</h3>
+            <p class="text-slate-600 font-light text-sm leading-relaxed">${props.item.desc}</p>
+          </div>
+        `;
+      };
+
+      var StatCard = function(props) {
+        return html`
+          <div class="p-8 rounded-2xl bg-white border border-slate-100 shadow-sm flex flex-col justify-center gap-2 hover:border-teal-500 transition-colors relative overflow-hidden">
+             <div class="absolute -right-4 -top-4 opacity-5 text-teal-900 transform rotate-12">${Icon(props.item.icon, 100)}</div>
+             <div class="text-teal-600 mb-1">${Icon(props.item.icon, 28)}</div>
+             <div class="text-4xl serif font-bold text-slate-900">${props.item.number}</div>
+             <div class="text-xs font-bold tracking-widest uppercase text-slate-500">${props.item.label}</div>
+          </div>
+        `;
+      };
+
+      // --- MAIN APP ---
+      var App = function() {
+        useEffect(function() {
+          if (window.lucide) {
+            window.lucide.createIcons();
+          }
+        });
+
+        return html`
+        <div class="min-h-screen flex flex-col selection:bg-orange-100 selection:text-orange-900">
+
+          <!-- HERO -->
+          <div class="relative bg-culture-dark text-white pt-32 pb-40 px-6 overflow-hidden">
+            <!-- Decorative Circles -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-white opacity-5 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 rounded-full bg-orange-500 opacity-10 blur-3xl"></div>
+
+            <div class="max-w-4xl mx-auto relative z-10 text-center">
+              <div class="mb-8 inline-block px-4 py-1.5 rounded-full border border-teal-400/30 bg-teal-800/30 backdrop-blur-sm">
+                <span class="text-teal-200 text-xs font-bold tracking-[0.2em] uppercase">
+                  ${CONTENT.hero.tag}
+                </span>
+              </div>
+              <h1 class="text-5xl md:text-7xl serif font-bold leading-tight tracking-tight mb-6">
+                ${CONTENT.hero.title}
+              </h1>
+              
+              <p class="text-xl md:text-2xl font-light text-teal-100 mb-10 font-sans max-w-2xl mx-auto">
+                ${CONTENT.hero.tagline}
+              </p>
+
+              <div class="max-w-xl mx-auto border-t border-teal-500/30 pt-8 mb-12">
+                <p class="text-sm md:text-base text-teal-50 leading-loose">
+                  ${CONTENT.hero.sub}
+                </p>
+              </div>
+
+              <button class="px-10 py-4 bg-gradient-to-r from-orange-500 to-rose-600 text-white font-bold text-sm uppercase tracking-widest rounded-full shadow-lg shadow-orange-900/20 hover:shadow-orange-500/40 hover:-translate-y-1 transition-all duration-300">
+                  ${CONTENT.hero.cta}
+              </button>
+            </div>
+          </div>
+
+          <!-- RISKS (THE WHY) -->
+          <section class="py-20 px-6 bg-warm-50 relative -mt-16 z-20">
+            <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-100 p-8 md:p-12">
+               <div class="grid md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                  ${CONTENT.risks.map(function(r) {
+                    return html`
+                      <div class="flex flex-col items-center text-center p-4">
+                        <div class="text-rose-500 mb-4 bg-rose-50 p-3 rounded-full">${Icon(r.icon, 24)}</div>
+                        <p class="serif text-base text-slate-700 leading-snug font-medium">${r.text}</p>
+                      </div>
+                    `;
+                  })}
+               </div>
+            </div>
+          </section>
+
+          <!-- SCOPE (PILLARS) -->
+          <section class="py-28 px-6 bg-warm-50">
+            <div class="max-w-6xl mx-auto">
+               ${h(SectionHeader, {
+                 subtitle: "Holistic Assessment",
+                 title: "The Three Pillars of Responsibility",
+                 center: true
+               })}
+               <div class="grid md:grid-cols-3 gap-6">
+                 ${CONTENT.pillars.map(function(item) { return h(PillarCard, { item: item }); })}
+               </div>
+            </div>
+          </section>
+
+          <!-- PROCESS -->
+          <section class="py-28 px-6 bg-white">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
+              <div class="sticky top-10">
+                 ${h(SectionHeader, { 
+                    subtitle: "Methodology", 
+                    title: "From Planning to Legacy", 
+                    center: false 
+                 })}
+                 <p class="text-slate-600 mb-10 leading-relaxed font-light text-lg">
+                   Festivals are ephemeral, but their impact endures. We deploy a rapid-response team to audit your event live, capturing the data that defines your narrative.
+                 </p>
+                 <div class="inline-flex items-center gap-4 px-6 py-4 bg-slate-50 border border-slate-200 rounded-lg">
+                    <span class="text-vibrant">${Icon("clock", 24)}</span>
+                    <div>
+                      <span class="block text-xs font-bold uppercase tracking-wider text-slate-500">Execution Timeline</span>
+                      <span class="serif text-lg text-slate-900">2 Weeks</span>
+                    </div>
+                 </div>
+              </div>
+              <div class="pt-4">
+                ${CONTENT.steps.map(function(step, idx) {
+                  return h(ProcessStep, {
+                    number: "0" + (idx + 1),
+                    step: step,
+                    isLast: idx === CONTENT.steps.length - 1
+                  });
+                })}
+              </div>
+            </div>
+          </section>
+
+          <!-- OUTCOMES -->
+          <section class="py-28 px-6 bg-warm-50">
+            <div class="max-w-6xl mx-auto">
+              ${h(SectionHeader, { subtitle: "Outcomes", title: "Why Leadership Matters", center: true })}
+
+              <div class="grid md:grid-cols-3 gap-12 pb-16">
+                ${CONTENT.benefits.map(function(item) { return h(BenefitCard, { item: item }); })}
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-6 mt-8">
+                ${CONTENT.stats.map(function(item) { return h(StatCard, { item: item }); })}
+              </div>
+            </div>
+          </section>
+
+          <!-- CREDIBILITY -->
+          <section class="py-20 px-6 bg-culture-dark text-center">
+            <div class="max-w-4xl mx-auto">
+              <h4 class="text-teal-300 font-bold tracking-[0.2em] uppercase text-xs mb-8">Aligned with Global Standards</h4>
+              <div class="flex flex-wrap justify-center gap-x-8 gap-y-6">
+                ${CONTENT.certifications.map(function(c) {
+                  return html`
+                    <span class="text-white font-sans text-sm font-semibold flex items-center gap-2 uppercase tracking-wide bg-teal-800/50 border border-teal-600 px-6 py-3 rounded-full hover:bg-teal-700 transition-colors cursor-default">
+                      ${Icon(c.icon, 16, "#F97316")} ${c.label}
+                    </span>
+                  `;
+                })}
+              </div>
+            </div>
+          </section>
+
+          <!-- FOOTER -->
+          <footer class="relative py-24 px-6 overflow-hidden bg-white text-center">
+            <div class="max-w-2xl mx-auto relative z-10">
+              <div class="inline-block mb-6 text-rose-500 opacity-80">${Icon("feather", 48)}</div>
+              <h2 class="text-4xl serif text-slate-900 leading-tight mb-6 font-bold">
+                Your event is a moment.<br/>Make it a movement.
+              </h2>
+              <div class="mt-10">
+                <button class="px-10 py-4 bg-slate-900 text-white font-bold text-xs uppercase tracking-widest hover:bg-vibrant transition-colors duration-300 rounded-full">
+                  Begin the Dialogue
+                </button>
+              </div>
+              <p class="text-slate-400 text-[10px] tracking-widest uppercase mt-12">For Cultural Events & Literary Festivals</p>
+            </div>
+          </footer>
+
+        </div>
+        `;
+      };
+
+      render(h(App), document.getElementById("app"));
+    })();
+  </script>
+</body>
+</html>
